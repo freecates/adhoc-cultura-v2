@@ -20,12 +20,15 @@ export default function Footer () {
           <p className="text-xs text-gray-500">© Adhoc Cultura. All rights reserved.</p>
           <nav className="sm:ml-auto flex gap-4 sm:gap-6">
             <Link className="text-xs hover:underline underline-offset-4" href="#">
-              Terms of Service
+              Contacte
             </Link>
             <Link className="text-xs hover:underline underline-offset-4" href="#">
-              Privacy
+              Avís Legal
             </Link>
           </nav>
+        </section>
+        <section className="flex flex-col sm:flex-row w-full shrink-0 items-center px-4 md:hidden">
+          <Button asChild={true} variant={'secondary'} size={"sm"}><a href="https://www.aracultura.com/" target="_blank">ARA Cultura</a></Button>
         </section>
       </footer>
     )

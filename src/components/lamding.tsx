@@ -2,10 +2,19 @@
 import { Button } from "@/components/ui/button"
 import { CardHeader, CardContent, Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { JSX, SVGProps } from "react"
 import Image from "next/image"
+import api from "@/lib/api"
 
-export function Landing() {
+type Servei = {
+  title: string;
+  name: string;
+};
+type ServeisProps = { 
+  serveis: Servei[]
+};
+
+export async function Landing(): Promise<JSX.Element> {
+  const { serveis }: ServeisProps = await getData();
   return (
       <main className="flex-1">
         <section className="w-full pt-12 md:pt-24 lg:pt-32 border-y">
@@ -41,107 +50,25 @@ export function Landing() {
               </p>
             </div>
             <div className="mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3">
-              <Card>
-                <CardHeader>
-                  <Image
-                    width={48}
-                    height={27}
-                    alt="Ad"
-                    className="w-12 transition-all duration-500 ease-in-out"
-                    src="https://www.adhoc-cultura.com/static/bg-adhoc-cultura-1024.jpg"
-                  />
-                  <h3 className="text-lg font-bold">Auditoria</h3>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Auditoria i consultoria general de cultura
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                <Image
-                    width={48}
-                    height={27}
-                    alt="Ad"
-                    className="w-12 transition-all duration-500 ease-in-out"
-                    src="https://www.adhoc-cultura.com/static/bg-adhoc-cultura-1024.jpg"
-                  />
-                  <h3 className="text-lg font-bold">Estudi</h3>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Estudi, disseny i millora instal·lacions i materials audiovisuals
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                <Image
-                    width={48}
-                    height={27}
-                    alt="Ad"
-                    className="w-12 transition-all duration-500 ease-in-out"
-                    src="https://www.adhoc-cultura.com/static/bg-adhoc-cultura-1024.jpg"
-                  />
-                  <h3 className="text-lg font-bold">Innovació</h3>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Innovació cultural i+d en cultura
-                  </p>
-                </CardContent>
-              </Card><Card>
-                <CardHeader>
-                  <Image
-                    width={48}
-                    height={27}
-                    alt="Ad"
-                    className="w-12 transition-all duration-500 ease-in-out"
-                    src="https://www.adhoc-cultura.com/static/bg-adhoc-cultura-1024.jpg"
-                  />
-                  <h3 className="text-lg font-bold">Producció</h3>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Producció, creació, gestió i comunicació esdeveniments culturals
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                <Image
-                    width={48}
-                    height={27}
-                    alt="Ad"
-                    className="w-12 transition-all duration-500 ease-in-out"
-                    src="https://www.adhoc-cultura.com/static/bg-adhoc-cultura-1024.jpg"
-                  />
-                  <h3 className="text-lg font-bold">Programació</h3>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Programació, comissariat i muntatge exposicions
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                <Image
-                    width={48}
-                    height={27}
-                    alt="Ad"
-                    className="w-12 transition-all duration-500 ease-in-out"
-                    src="https://www.adhoc-cultura.com/static/bg-adhoc-cultura-1024.jpg"
-                  />
-                  <h3 className="text-lg font-bold">Educació</h3>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Serveis educatius per a institucions culturals
-                  </p>
-                </CardContent>
-              </Card>
+              {serveis.map((s, index): JSX.Element => (
+                    <Card key={index + s.title}>
+                    <CardHeader>
+                      <Image
+                        width={48}
+                        height={27}
+                        alt="Adhoc Logo"
+                        className="w-12 transition-all duration-500 ease-in-out"
+                        src="https://www.adhoc-cultura.com/static/bg-adhoc-cultura-1024.jpg"
+                      />
+                      <h3 className="text-lg font-bold">{s.title}</h3>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {s.name}
+                      </p>
+                    </CardContent>
+                  </Card>
+              ))}
             </div>
           </div>
         </section>
@@ -208,24 +135,11 @@ export function Landing() {
   )
 }
 
-
-function CreativeCommonsIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <path d="M10 9.3a2.8 2.8 0 0 0-3.5 1 3.1 3.1 0 0 0 0 3.4 2.7 2.7 0 0 0 3.5 1" />
-      <path d="M17 9.3a2.8 2.8 0 0 0-3.5 1 3.1 3.1 0 0 0 0 3.4 2.7 2.7 0 0 0 3.5 1" />
-    </svg>
-  )
-}
+const getData = async (): Promise<any> => {
+  const [serveis] = await Promise.all([
+      api.adhocCulturaData.getData('serveis'),
+  ]);
+  return {
+      serveis
+  };
+};
