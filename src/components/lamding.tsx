@@ -1,9 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Button } from "@/components/ui/button"
-import { CardHeader, CardContent, Card } from "@/components/ui/card"
+import { CardContent, Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import api from "@/lib/api"
+import SectionGripOfCards from "./sectionGridOfCards"
 
 type Servei = {
   title: string;
@@ -41,37 +42,7 @@ export async function Landing(): Promise<JSX.Element> {
             />
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container mx-auto space-y-12 px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Serveis</h2>
-              <p className="max-w-[900px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                Estem especialitzats en un conjunt de serveris culturals creatius per ajudar-vos a reixir.
-              </p>
-            </div>
-            <div className="mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3">
-              {serveis.map((s, index): JSX.Element => (
-                    <Card key={index + s.title}>
-                    <CardHeader>
-                      <Image
-                        width={48}
-                        height={27}
-                        alt="Adhoc Logo"
-                        className="w-12 transition-all duration-500 ease-in-out"
-                        src="https://www.adhoc-cultura.com/static/bg-adhoc-cultura-1024.jpg"
-                      />
-                      <h3 className="text-lg font-bold">{s.title}</h3>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {s.name}
-                      </p>
-                    </CardContent>
-                  </Card>
-              ))}
-            </div>
-          </div>
-        </section>
+        <SectionGripOfCards title={"Serveis"} description={"Estem especialitzats en un conjunt de serveris culturals creatius per ajudar-vos a reixir."} data={serveis} image={{src: "/bg-adhoc-cultura-320.jpg", alt: "Adhoc Logo"}} />
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-800 text-white">
           <div className="container mx-auto grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
