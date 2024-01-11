@@ -14,7 +14,9 @@ type Contact = {
 export default async function Contacte() {
 const { name, lat, lng, address, code, city, tel, mail } = await getData();
   return (
-    <pre>{JSON.stringify({ name, lat, lng, address, code, city, tel, mail }, null, 2)}</pre>
+    <main className="flex-1">
+        <pre>{JSON.stringify({ name, lat, lng, address, code, city, tel, mail }, null, 2)}</pre>
+    </main>
   )
 }
 

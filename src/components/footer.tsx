@@ -12,7 +12,7 @@ export default function Footer () {
               </p>
             </div>
             <div className="flex space-x-4 lg:justify-end">
-              <Button>Envieu missatge</Button>
+              <Button asChild={true}><Link href="/contacte">Envieu missatge</Link></Button>
             </div>
           </div>
         </section>

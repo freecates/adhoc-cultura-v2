@@ -15,7 +15,7 @@ export default async function Header(): Promise<JSX.Element> {
   const { routes }: RoutesProps = await getData();
     return (
         
-        <header className="px-4 lg:px-6 py-2 md:h-20 flex flex-col md:flex-row items-center">
+        <header className="px-4 lg:px-6 py-2 md:h-20 flex flex-col md:flex-row items-center border-b">
         <Link className="flex items-center justify-center mr-1" href="/">
           <Image
               width={80}

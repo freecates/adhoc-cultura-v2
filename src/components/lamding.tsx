@@ -5,20 +5,26 @@ import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import api from "@/lib/api"
 import SectionGripOfCards from "./sectionGridOfCards"
+import SectionGripOfImages from "./sectionGridOfImages"
 
 type Servei = {
   title: string;
   name: string;
 };
+type Client = {
+  name: string;
+  logo: string;
+}
 type ServeisProps = { 
-  serveis: Servei[]
+  serveis: Servei[];
+  clients: Client[];
 };
 
 export async function Landing(): Promise<JSX.Element> {
-  const { serveis }: ServeisProps = await getData();
+  const { serveis, clients }: ServeisProps = await getData();
   return (
       <main className="flex-1">
-        <section className="w-full pt-12 md:pt-24 lg:pt-32 border-y">
+        <section className="w-full pt-12 md:pt-24 lg:pt-32 border-b">
           <div className="px-4 md:px-6 space-y-10 xl:space-y-16">
             <div className="grid max-w-[1300px] mx-auto gap-4 px-4 sm:px-6 md:px-10 md:grid-cols-2 md:gap-16">
               <div>
@@ -37,7 +43,7 @@ export async function Landing(): Promise<JSX.Element> {
               alt="Ad"
               className="mx-auto aspect-[16/9] overflow-hidden rounded-t-xl object-cover transition-all duration-500 ease-in-out"
               height="574"
-              src="https://www.adhoc-cultura.com/static/bg-adhoc-cultura-1024.jpg"
+              src="/bg-adhoc-cultura-1024.jpg"
               width="1034"
             />
           </div>
@@ -73,44 +79,18 @@ export async function Landing(): Promise<JSX.Element> {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Projectes</h2>
-              <p className="max-w-[900px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                Feu una ullada als nostres projectes.
-              </p>
-            </div>
-            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
-              <Image
-                alt="Portfolio Item 1"
-                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full transition-all duration-500 ease-in-out"
-                height="300"
-                src="https://adhocdata.vercel.app/static/clients/iluro-adhoc-cultura.jpg"
-                width="550"
-              />
-              <Image
-                alt="Portfolio Item 2"
-                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full transition-all duration-500 ease-in-out"
-                height="300"
-                src="https://adhocdata.vercel.app/static/clients/museu-emporda-adhoc-cultura.jpg"
-                width="550"
-              />
-            </div>
-            <div className="flex justify-center">
-              <Button>Veure'n més</Button>
-            </div>
-          </div>
-        </section>
+        <SectionGripOfImages title={"Projectes"} description={"Feu una ullada als nostres projectes."} data={clients} isShuffled maxItems={2} buttonText={"Veure'n més"} buttonLink={"/treballem-per"} />
       </main>
   )
 }
 
 const getData = async (): Promise<any> => {
-  const [serveis] = await Promise.all([
+  const [serveis, clients] = await Promise.all([
       api.adhocCulturaData.getData('serveis'),
+      api.adhocCulturaData.getData('clients'),
   ]);
   return {
-      serveis
+      serveis,
+      clients
   };
 };
