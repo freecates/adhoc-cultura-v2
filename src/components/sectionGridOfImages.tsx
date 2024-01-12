@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import Image from "next/image"
 import { Button } from "./ui/button";
-import { shuffleArray } from "@/lib/utils";
+import { shimmer, shuffleArray, toBase64 } from "@/lib/utils";
 import Link from "next/link";
 
 type DataObject = {
@@ -39,6 +39,7 @@ const GridOfImages: React.FC<Grid> = ({ data, isShuffled, maxItems, maxCols }) =
                     className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full transition-all duration-500 ease-in-out"
                     height="300"
                     src={d.logo}
+                    placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(550, 300))}`}
                     width="550"
                 />
             ))}

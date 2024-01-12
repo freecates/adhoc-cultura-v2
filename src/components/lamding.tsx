@@ -4,6 +4,7 @@ import { CardContent, Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import api from "@/lib/api"
+import { shimmer, toBase64 } from "@/lib/utils"
 import SectionGripOfCards from "./sectionGridOfCards"
 import SectionGripOfImages from "./sectionGridOfImages"
 
@@ -45,6 +46,7 @@ export async function Landing(): Promise<JSX.Element> {
               height="574"
               src="/bg-adhoc-cultura-1024.jpg"
               width="1034"
+              placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(1034, 574))}`}
             />
           </div>
         </section>

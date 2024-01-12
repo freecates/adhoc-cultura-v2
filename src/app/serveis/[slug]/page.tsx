@@ -1,5 +1,6 @@
-import SectionGripOfCards, { GridOfCards } from "@/components/sectionGridOfCards";
+import { GridOfCards } from "@/components/sectionGridOfCards";
 import api from "@/lib/api";
+import { shimmer, toBase64 } from "@/lib/utils";
 import Image from "next/image";
 
 type Servei = {
@@ -39,6 +40,7 @@ export default async function Servei({ params }: { params: { slug: string } }) {
                             height="574"
                             src={servei.img}
                             width="1034"
+                            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(1034, 574))}`}
                         />
                     }
                 </div>
