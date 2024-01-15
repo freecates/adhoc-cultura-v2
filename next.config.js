@@ -8,7 +8,7 @@ const nextConfig = {
         },
         {
           protocol: 'https',
-          hostname: 'adhocdata.vercel.app',
+          hostname: 'adhocc-data.vercel.app',
         },
       ],
     },
