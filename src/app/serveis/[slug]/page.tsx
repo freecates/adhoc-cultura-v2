@@ -66,7 +66,7 @@ export default async function Servei({ params }: { params: { slug: string } }) {
 
 const getData = async (): Promise<any> => {
   const [serveis] = await Promise.all([
-      api.adhocCulturaData.getData('serveis'),
+      api.adhocCulturaData.getData('json', 'serveis'),
   ]);
   return {
       serveis,
@@ -74,7 +74,7 @@ const getData = async (): Promise<any> => {
 };
 
 export async function generateStaticParams() {
-    const serveis = await api.adhocCulturaData.getData('serveis');
+    const serveis = await api.adhocCulturaData.getData('json', 'serveis');
     const staticParams = serveis.map((s: { slug: string }) => ({
         slug: s.slug,
     }));

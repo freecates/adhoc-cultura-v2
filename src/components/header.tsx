@@ -40,7 +40,7 @@ export default async function Header(): Promise<JSX.Element> {
 }
 const getData = async (): Promise<any> => {
   const [routes] = await Promise.all([
-      api.adhocCulturaData.getData('routes'),
+      api.adhocCulturaData.getData('json', 'routes'),
   ]);
   return {
       routes

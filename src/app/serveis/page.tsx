@@ -21,7 +21,7 @@ export default async function Serveis(): Promise<JSX.Element> {
 
 const getData = async (): Promise<any> => {
   const [serveis] = await Promise.all([
-      api.adhocCulturaData.getData('serveis'),
+      api.adhocCulturaData.getData('json', 'serveis'),
   ]);
   return {
       serveis,

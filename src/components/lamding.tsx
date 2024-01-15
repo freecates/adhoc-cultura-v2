@@ -88,8 +88,8 @@ export async function Landing(): Promise<JSX.Element> {
 
 const getData = async (): Promise<any> => {
   const [serveis, clients] = await Promise.all([
-      api.adhocCulturaData.getData('serveis'),
-      api.adhocCulturaData.getData('clients'),
+      api.adhocCulturaData.getData('json', 'serveis'),
+      api.adhocCulturaData.getData('json', 'clients'),
   ]);
   return {
       serveis,

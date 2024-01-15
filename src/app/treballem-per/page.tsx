@@ -21,7 +21,7 @@ const { clients }: TreballerPer = await getData();
 
 const getData = async (): Promise<any> => {
   const [clients] = await Promise.all([
-      api.adhocCulturaData.getData('clients'),
+      api.adhocCulturaData.getData('json', 'clients'),
   ]);
   return { clients };
 };

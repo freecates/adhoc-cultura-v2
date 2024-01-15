@@ -22,7 +22,7 @@ const { name, lat, lng, address, code, city, tel, mail } = await getData();
 
 const getData = async (): Promise<any> => {
   const [contact] = await Promise.all([
-      api.adhocCulturaData.getData('contact'),
+      api.adhocCulturaData.getData('json', 'contact'),
   ]);
   return contact[0];
 };
