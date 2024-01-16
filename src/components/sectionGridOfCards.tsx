@@ -55,7 +55,13 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems, 
                             {icon && <Icon name={icon.name} color={icon.color} size={icon.size} />}
                             <h3 className="text-lg font-bold">{d.title}</h3>
                         </CardHeader>
-                    </Link>: 
+
+{d.name &&
+                        <CardContent>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                                {d.name}
+                            </p>
+                        </CardContent>}                    </Link>: 
                     <>
                         <CardHeader>
                             {image && <Image src={image.src} alt={image.alt} width={48} height={48} />}
