@@ -7,8 +7,9 @@ import api from "@/lib/api"
 import { shimmer, toBase64 } from "@/lib/utils"
 import SectionGripOfCards from "./sectionGridOfCards"
 import SectionGripOfImages from "./sectionGridOfImages"
+import dynamicIconImports from "lucide-react/dynamicIconImports"
 
-type Servei = {
+type Data = {
   title: string;
   name: string;
 };
@@ -17,12 +18,23 @@ type Client = {
   logo: string;
 }
 type ServeisProps = { 
-  serveis: Servei[];
+  serveis: Data[];
   clients: Client[];
+  projectes: {
+    title: string;
+    description: string;
+    icon?: {
+      name: keyof typeof dynamicIconImports;
+      color?: string;
+      size?: string;
+    }
+    data: Data[];
+  };
 };
 
 export async function Landing(): Promise<JSX.Element> {
-  const { serveis, clients }: ServeisProps = await getData();
+  const { serveis, clients, projectes }: ServeisProps = await getData();
+  const { title, description, icon, data } = projectes;
   return (
       <main className="flex-1">
         <section className="w-full pt-12 md:pt-24 lg:pt-32 border-b">
@@ -50,7 +62,8 @@ export async function Landing(): Promise<JSX.Element> {
             />
           </div>
         </section>
-        <SectionGripOfCards title={"Serveis"} description={"Estem especialitzats en un conjunt de serveris culturals creatius per ajudar-vos a reixir."} data={serveis} image={{src: "/bg-adhoc-cultura-320.jpg", alt: "Adhoc Logo"}} />
+        <SectionGripOfCards title={"Serveis"} description={"Estem especialitzats en un conjunt de serveris culturals creatius per ajudar-vos a reixir."} data={serveis} image={{src: "/bg-adhoc-cultura-320.jpg", alt: "Adhoc Logo"}} maxCols={3} />
+        <SectionGripOfCards title={title} description={`Selecció de: ${description}`} data={data} icon={icon} isShuffled maxItems={4} buttonText={"Veure'n més"} buttonLink={"/projectes"} />
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-800 text-white">
           <div className="container mx-auto grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
@@ -81,18 +94,20 @@ export async function Landing(): Promise<JSX.Element> {
             </div>
           </div>
         </section>
-        <SectionGripOfImages title={"Projectes"} description={"Feu una ullada als nostres projectes."} data={clients} isShuffled maxItems={2} buttonText={"Veure'n més"} buttonLink={"/treballem-per"} />
+        <SectionGripOfImages title={"Treballem per"} description={"Feu una ullada als nostres clients."} data={clients} isShuffled maxItems={2} buttonText={"Veure'n més"} buttonLink={"/treballem-per"} />
       </main>
   )
 }
 
 const getData = async (): Promise<any> => {
-  const [serveis, clients] = await Promise.all([
+  const [serveis, clients, projectes] = await Promise.all([
       api.adhocCulturaData.getData('json', 'serveis'),
       api.adhocCulturaData.getData('json', 'clients'),
+      api.adhocCulturaData.getData('json', 'projectes'),
   ]);
   return {
       serveis,
-      clients
+      clients,
+      projectes,
   };
 };
