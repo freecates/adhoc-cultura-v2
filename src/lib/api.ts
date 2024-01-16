@@ -1,7 +1,7 @@
 const staticDataUrl = process.env.STATIC_DATA_URL;
 
 const getJson = (fileName: string): URL => new URL(`${staticDataUrl}/${fileName}.json`);
-const getMd = (fileName: string): URL => new URL(`${staticDataUrl}/${fileName}.md`);
+const getMd = (fileName: string): URL => new URL(`${staticDataUrl}/content/${fileName}.md`);
 
 const getByFileType = (type: string, fileName: string): URL => {
     switch (type) {

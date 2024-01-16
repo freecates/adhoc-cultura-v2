@@ -2,13 +2,12 @@ import Markdown from "markdown-to-jsx";
 
 type Props = {
     content: string;
+    styles?: string;
 };
 
-const MdFileContent: React.FC<Props> = ({ content }) => {
+const MdFileContent: React.FC<Props> = ({ content, styles }) => {
     return (
-        <div>
-            <Markdown>{content}</Markdown>
-        </div>
+        <Markdown className={`markdown ${styles ? styles : ''}`}>{content}</Markdown>
     );
 };
 

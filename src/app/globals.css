@@ -36,3 +36,14 @@ body {
 .text-card-foreground {
   color: hsl(var(--forgroung-text));
 }
+.markdown {
+  h2 {
+    @apply mt-8 text-3xl font-bold;
+  }
+  p {
+    @apply mt-4;
+  }
+  ul {
+    @apply list-disc p-4;
+  }
+}
