@@ -1,6 +1,8 @@
 import { CardHeader, CardContent, Card } from "@/components/ui/card"
 import Image from "next/image"
 import Link from "next/link";
+import Icon from "./ui/icon";
+import dynamicIconImports from "lucide-react/dynamicIconImports";
 
 type DataObject = {
     title: string;
@@ -15,6 +17,11 @@ type Grid = {
       src: string;
       alt: string;
     };
+    icon?: {
+      name: keyof typeof dynamicIconImports;
+      color?: string;
+      size?: string;
+    }
 }
 
 interface ISectionProps extends Grid {
@@ -22,7 +29,7 @@ interface ISectionProps extends Grid {
     description: string;
 }
 
-const GridOfCards: React.FC<Grid> = ({ data, image }) => (            
+const GridOfCards: React.FC<Grid> = ({ data, image, icon }) => (            
     <div className="mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3">
         {data.map((d, index): JSX.Element => (
         <Card key={index + d.title}>
@@ -30,6 +37,7 @@ const GridOfCards: React.FC<Grid> = ({ data, image }) => (
                 <Link href={`/${d.type ? `${d.type}/` : ''}${d.slug}`}>
                     <CardHeader>
                         {image && <Image src={image.src} alt={image.alt} width={48} height={48} />}
+                        {icon && <Icon name={icon.name} color={icon.color} size={icon.size} />}
                         <h3 className="text-lg font-bold">{d.title}</h3>
                     </CardHeader>
                     <CardContent>
@@ -41,6 +49,7 @@ const GridOfCards: React.FC<Grid> = ({ data, image }) => (
                 <>
                     <CardHeader>
                         {image && <Image src={image.src} alt={image.alt} width={48} height={48} />}
+                        {icon && <Icon name={icon.name} color={icon.color} size={icon.size} />}
                         <h3 className="text-lg font-bold">{d.title}</h3>
                     </CardHeader>
                     <CardContent>
@@ -56,7 +65,7 @@ const GridOfCards: React.FC<Grid> = ({ data, image }) => (
 
 export { GridOfCards };
 
-const SectionGripOfCards: React.FC<ISectionProps> = ({ title, description, data, image }) => {
+const SectionGripOfCards: React.FC<ISectionProps> = ({ title, description, data, image, icon }) => {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32">
         <div className="container mx-auto space-y-12 px-4 md:px-6">
@@ -68,7 +77,7 @@ const SectionGripOfCards: React.FC<ISectionProps> = ({ title, description, data,
                     </p>
                 }
             </div>
-            <GridOfCards data={data} image={image} />
+            <GridOfCards data={data} image={image} icon={icon} />
         </div>
     </section>
   )
