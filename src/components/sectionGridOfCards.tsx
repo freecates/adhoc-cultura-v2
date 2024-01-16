@@ -43,8 +43,9 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems, 
     } else {
         array = maxItems ? data.slice(0, maxItems) : data;
     }
+    console.log(maxCols)
     return (            
-        <div className={`mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 ${maxCols && `lg:grid-cols-${maxCols}`} md:gap-12 lg:max-w-5xl`}>
+        <div className={`mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 lg:grid-cols-2 ${maxCols && `lg:grid-cols-${maxCols}`} md:gap-12 lg:max-w-5xl lg:gap-12`}>
             {array.map((d, index): JSX.Element => (
             <Card key={index + d.title}>
                 {d.slug ? 
