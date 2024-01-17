@@ -12,7 +12,6 @@ type DataObject = {
 type Grid = {
     data: DataObject[];
     maxItems?: number;
-    maxCols?: number;
     isShuffled?: boolean;
 }
 
@@ -23,15 +22,17 @@ interface ISectionProps extends Grid {
     buttonLink?: string;
 }
 
-const GridOfImages: React.FC<Grid> = ({ data, isShuffled, maxItems, maxCols }) => {
+const GridOfImages: React.FC<Grid> = ({ data, isShuffled, maxItems }) => {
     let array = [];
     if (isShuffled) {
         array = maxItems ? shuffleArray(data).slice(0, maxItems) : shuffleArray(data);
     } else {
         array = maxItems ? data.slice(0, maxItems) : data;
     }
+    const xlCols = array.length >= 3 ? 'xl:grid-cols-3' : '';
+
     return (  
-        <div className={`mx-auto grid max-w-5xl xl:max-w-7xl items-center gap-6 py-12 lg:grid-cols-2 lg:grid-cols-2 ${maxCols ? 'lg:grid-cols-' + maxCols : ''} lg:gap-12`}>
+        <div className={`mx-auto grid max-w-5xl xl:max-w-7xl items-center gap-6 py-12 lg:grid-cols-2 ${xlCols} lg:gap-12`}>
             {array.map((d, index): JSX.Element => (
                 <Image
                     key={index + d.name}
@@ -46,7 +47,7 @@ const GridOfImages: React.FC<Grid> = ({ data, isShuffled, maxItems, maxCols }) =
         </div>   
     )}
 
-const SectionGripOfImages: React.FC<ISectionProps> = ({ title, description, data, maxItems, isShuffled, buttonText, buttonLink, maxCols }) => {
+const SectionGripOfImages: React.FC<ISectionProps> = ({ title, description, data, maxItems, isShuffled, buttonText, buttonLink }) => {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 md:px-6">
@@ -58,7 +59,7 @@ const SectionGripOfImages: React.FC<ISectionProps> = ({ title, description, data
                     </p>
                 }
             </div>
-            <GridOfImages data={data} maxItems={maxItems} isShuffled={isShuffled} maxCols={maxCols} />
+            <GridOfImages data={data} maxItems={maxItems} isShuffled={isShuffled} />
             {buttonText &&
                 <div className="flex justify-center">
                     {buttonLink ? <Button asChild><Link href={buttonLink}>{buttonText}</Link></Button>: <Button>{buttonText}</Button>}

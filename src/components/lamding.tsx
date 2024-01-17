@@ -62,8 +62,8 @@ export async function Landing(): Promise<JSX.Element> {
             />
           </div>
         </section>
-        <SectionGripOfCards title={"Serveis"} description={"Estem especialitzats en un conjunt de serveris culturals creatius per ajudar-vos a reixir."} data={serveis} image={{src: "/bg-adhoc-cultura-320.jpg", alt: "Adhoc Logo"}} maxCols={3} />
-        <SectionGripOfCards title={title} description={`Selecció de: ${description}`} data={data} icon={icon} isShuffled maxItems={4} maxCols={2} buttonText={"Veure'n més"} buttonLink={"/projectes"} />
+        <SectionGripOfCards title={"Serveis"} description={"Estem especialitzats en un conjunt de serveris culturals creatius per ajudar-vos a reixir."} data={serveis} image={{src: "/bg-adhoc-cultura-320.jpg", alt: "Adhoc Logo"}} />
+        <SectionGripOfCards title={title} description={`Selecció de: ${description}`} data={data} icon={icon} isShuffled maxItems={4} buttonText={"Veure'n més"} buttonLink={"/projectes"} />
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-800 text-white">
           <div className="container mx-auto grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">

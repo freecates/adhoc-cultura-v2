@@ -29,7 +29,7 @@ export default async function Name({ params }: { params: { name: string } }): Pr
   const { title, description, image, icon, data } = pageData
   return (
       <main className="flex-1">
-        <SectionGripOfCards title={title} description={description} data={data} image={image && image} icon={icon && icon} maxCols={3} />
+        <SectionGripOfCards title={title} description={description} data={data} image={image && image} icon={icon && icon} />
       </main>
   )
 }

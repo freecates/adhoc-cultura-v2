@@ -25,7 +25,6 @@ type Grid = {
         size?: string;
     };
     maxItems?: number;
-    maxCols?: number;
     isShuffled?: boolean;
 };
 
@@ -36,16 +35,18 @@ interface ISectionProps extends Grid {
     buttonLink?: string;
 }
 
-const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems, maxCols }) => {
+const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }) => {
     let array = [];
     if (isShuffled) {
         array = maxItems ? shuffleArray(data).slice(0, maxItems) : shuffleArray(data);
     } else {
         array = maxItems ? data.slice(0, maxItems) : data;
     }
+    const xlCols = array.length >= 6 ? 'xl:grid-cols-3' : '';
+
     return (
         <div
-            className={`mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 lg:grid-cols-2 ${maxCols ? 'lg:grid-cols-' + maxCols : ''} md:gap-12 lg:max-w-5xl lg:gap-12`}
+            className={`mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 ${xlCols} md:gap-12 lg:max-w-5xl lg:gap-12`}
         >
             {array.map(
                 (d, index): JSX.Element => (
@@ -123,7 +124,6 @@ const SectionGripOfCards: React.FC<ISectionProps> = ({
     image,
     icon,
     maxItems,
-    maxCols,
     isShuffled,
     buttonText,
     buttonLink,
@@ -145,7 +145,6 @@ const SectionGripOfCards: React.FC<ISectionProps> = ({
                     icon={icon}
                     maxItems={maxItems}
                     isShuffled={isShuffled}
-                    maxCols={maxCols}
                 />
                 {buttonText && (
                     <div className='flex justify-center'>
