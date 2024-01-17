@@ -13,28 +13,32 @@ type Data = {
   title: string;
   name: string;
 };
+type Model = {
+  title: string;
+  description: string;
+  icon?: {
+    name: keyof typeof dynamicIconImports;
+    color?: string;
+    size?: string;
+  }
+  image?: {
+    src: string;
+    alt: string;
+  }
+  data: Data[];
+}
 type Client = {
   name: string;
   logo: string;
 }
 type ServeisProps = { 
-  serveis: Data[];
+  serveis: Model;
   clients: Client[];
-  projectes: {
-    title: string;
-    description: string;
-    icon?: {
-      name: keyof typeof dynamicIconImports;
-      color?: string;
-      size?: string;
-    }
-    data: Data[];
-  };
+  projectes: Model;
 };
 
 export async function Landing(): Promise<JSX.Element> {
   const { serveis, clients, projectes }: ServeisProps = await getData();
-  const { title, description, icon, data } = projectes;
   return (
       <main className="flex-1">
         <section className="w-full pt-12 md:pt-24 lg:pt-32 border-b">
@@ -62,8 +66,8 @@ export async function Landing(): Promise<JSX.Element> {
             />
           </div>
         </section>
-        <SectionGripOfCards title={"Serveis"} description={"Estem especialitzats en un conjunt de serveris culturals creatius per ajudar-vos a reixir."} data={serveis} image={{src: "/bg-adhoc-cultura-320.jpg", alt: "Adhoc Logo"}} />
-        <SectionGripOfCards title={title} description={`Selecció de: ${description}`} data={data} icon={icon} isShuffled maxItems={4} buttonText={"Veure'n més"} buttonLink={"/projectes"} />
+        <SectionGripOfCards title={serveis?.title} description={"Estem especialitzats en un conjunt de serveris culturals creatius per ajudar-vos a reixir."} data={serveis.data} image={serveis.image} />
+        <SectionGripOfCards title={projectes.title} description={`Selecció de: ${projectes.description}`} data={projectes.data} icon={projectes.icon} isShuffled maxItems={4} buttonText={"Veure'n més"} buttonLink={"/projectes"} />
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-800 text-white">
           <div className="container mx-auto grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">
