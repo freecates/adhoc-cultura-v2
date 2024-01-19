@@ -35,11 +35,8 @@ export default async function Header(): Promise<JSX.Element> {
                         src='/bg-adhoc-cultura-320.jpg'
                     />
                 </Link>
-                <div className='pl-4 md:hidden'>
-                    <AraCulturaButton textSize='text-xs' />
-                </div>
             </div>
-            <nav className='my-2 md:my-0 md:ml-auto md:mr-4 flex items-center justify-center gap-4 sm:gap-6'>
+            <nav className='my-2 md:my-0 md:ml-auto md:mr-4 flex items-bottom justify-center gap-4 sm:gap-6'>
                 {textRoutes.map(
                     (r, index): JSX.Element => (
                         <Link
@@ -47,7 +44,8 @@ export default async function Header(): Promise<JSX.Element> {
                             className='text-sm font-medium hover:underline underline-offset-4'
                             href={r.url}
                         >
-                            {r.name}
+                            <span className="block sm:hidden">{r.name.split(' ')[0]}</span>
+                            <span className="hidden md:block">{r.name}</span>
                         </Link>
                     ),
                 )}

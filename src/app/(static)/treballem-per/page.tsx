@@ -30,10 +30,6 @@ const { icon, data } = projectes;
   return (
     <main className="flex-1">
         <SectionGripOfImages title={"Treballem per"} data={clients} />
-        <hr className="max-w-[700px] mx-auto"/>
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <SectionGripOfCards title="Destaquem" description="Selecció de projectes" data={data} icon={icon} isShuffled maxItems={4} buttonText={"Veure'n més"} buttonLink={"/projectes"} />
-        </section>
     </main>
   )
 }

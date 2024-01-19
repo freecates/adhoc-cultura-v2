@@ -49,7 +49,6 @@ export default async function Metode() {
                             </div>
                         </div>
                     </section>
-                    <hr className="max-w-[700px] mx-auto"/>
                 </>
             }
         </main>
