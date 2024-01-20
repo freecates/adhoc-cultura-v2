@@ -1,6 +1,5 @@
 import Link from "next/link";
-import dynamicIconImports from "lucide-react/dynamicIconImports";
-import { Button } from "./ui/button";
+import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import Image from "next/image";
 import api from "@/lib/api";
 import Icon from "./ui/icon";
@@ -36,16 +35,16 @@ export default async function Header(): Promise<JSX.Element> {
                     />
                 </Link>
             </div>
-            <nav className='my-2 md:my-0 md:ml-auto md:mr-4 flex items-bottom justify-center gap-4 sm:gap-6'>
+
+            <nav className='w-full sm:max-md:max-w-[320px] md:max-w-lg uppercase overflow-x-auto my-2 md:my-0 md:ml-auto md:mr-4 flex items-center justify-between gap-4 sm:gap-6'>
                 {textRoutes.map(
                     (r, index): JSX.Element => (
                         <Link
                             key={index + r.name}
-                            className='text-sm font-medium hover:underline underline-offset-4'
+                            className='shrink-0 text-xs font-medium hover:underline underline-offset-4'
                             href={r.url}
                         >
-                            <span className="block sm:hidden">{r.name.split(' ')[0]}</span>
-                            <span className="hidden md:block">{r.name}</span>
+                            {r.name}
                         </Link>
                     ),
                 )}
