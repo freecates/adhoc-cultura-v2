@@ -33,7 +33,46 @@ const toBase64 = (str: string) =>
     ? Buffer.from(str).toString("base64")
     : window.btoa(str);
 
+const bgByType = (type: string) => {
+      switch (type) {
+          case 'bg-gray-50':
+              return 'bg-gray-50';
+          case 'bg-gray-100':
+              return 'bg-gray-100';
+          case 'bg-gray-200':
+              return 'bg-gray-200';
+          case 'bg-gray-300':
+              return 'bg-gray-300';
+          case 'bg-gray-400':
+              return 'bg-gray-400';
+          case 'bg-gray-500':
+              return 'bg-gray-500';
+          case 'bg-gray-600':
+              return 'bg-gray-600';
+          case 'bg-gray-700':
+              return 'bg-gray-700';
+          case 'bg-gray-800':
+              return 'bg-gray-800';
+          case 'bg-gray-900':
+              return 'bg-gray-900';
+          default:
+              return 'bg-gray-50';
+      }
+  };
+  
+  const colorByType = (type: string) => {
+      switch (type) {
+          case 'text-white':
+              return 'text-white';
+          case 'text-black':
+              return 'text-black';
+          default:
+              return 'text-white';
+      }
+  };
 export {
+  bgByType,
+  colorByType,
   shuffleArray,
   shimmer,
   toBase64,

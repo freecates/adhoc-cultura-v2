@@ -8,6 +8,7 @@ import { shimmer, toBase64 } from "@/lib/utils"
 import SectionGripOfCards from "./sectionGridOfCards"
 import SectionGripOfImages from "./sectionGridOfImages"
 import dynamicIconImports from "lucide-react/dynamicIconImports"
+import Link from 'next/link';
 
 type Data = {
   title: string;
@@ -54,7 +55,9 @@ export async function Landing(): Promise<JSX.Element> {
                           </p>
                       </div>
                       <div className='flex flex-col items-start space-y-4'>
-                          <Button>Comencem</Button>
+                          <Button asChild>
+                              <Link href={'/adhoc'}>Comencem</Link>
+                          </Button>
                       </div>
                   </div>
                   <Image
