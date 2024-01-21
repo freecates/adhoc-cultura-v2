@@ -16,6 +16,16 @@ const bgByType: Record<string, string> = {
   
   const colorByType: Record<string, string> = {
     textWhite:'text-white',
+    textGray50:'text-gray-50',
+    textGray100:'text-gray-100',
+    textGray200:'text-gray-200',
+    textGray300:'text-gray-300',
+    textGray400:'text-gray-400',
+    textGray500:'text-gray-500',
+    textGray600:'text-gray-600',
+    textGray700:'text-gray-700',
+    textGray800:'text-gray-800',
+    textGray900:'text-gray-900',
     textBlack:'text-black',
   };
 
