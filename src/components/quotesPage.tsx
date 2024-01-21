@@ -1,6 +1,24 @@
-import { bgByType, colorByType } from "@/lib/utils";
-
 /* eslint-disable react/no-unescaped-entities */
+
+const bgByType: Record<string, string> = {
+    bgWhite:'bg-white',
+    bgGray50:'bg-gray-50',
+    bgGray100:'bg-gray-100',
+    bgGray200:'bg-gray-200',
+    bgGray300:'bg-gray-300',
+    bgGray400:'bg-gray-400',
+    bgGray500:'bg-gray-500',
+    bgGray600:'bg-gray-600',
+    bgGray700:'bg-gray-700',
+    bgGray800:'bg-gray-800',
+    bgGray900:'bg-gray-900',
+  };
+  
+  const colorByType: Record<string, string> = {
+    textWhite:'text-white',
+    textBlack:'text-black',
+  };
+
 type Quote = {
     quote: string;
     author: string;
@@ -24,7 +42,7 @@ const QuotesPage: React.FC<Quotes> = ({ data }) => {
     return (
         <>
             <section
-                className={`${fullQuote?.bg} w-full h-screen bg-white flex items-center justify-center text-center ${fullQuote?.color}`}
+                className={'bg-white w-full h-screen bg-white flex items-center justify-center text-center text-black'}
             >
                 <div className='container px-4 md:px-6'>
                     <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold'>
@@ -35,8 +53,11 @@ const QuotesPage: React.FC<Quotes> = ({ data }) => {
             </section>
             <Quotes
                 quotes={normalQuotes}
-                renderQuote={(q: Quote) => (
-                    <section className={`${bgByType(q.bg)} w-full py-12 ${colorByType(q.color)}`}>
+                renderQuote={(q: Quote) => {
+                    let bg = bgByType[q.bg];
+                    let color = colorByType[q.color];
+                    return (
+                    <section className={`${bg} ${color} w-full py-12`}>
                         <div className='container mx-auto px-4 md:px-6 text-center'>
                             <h2 className='text-3xl md:text-4xl lg:text-5xl font-bold'>
                                 "{q.quote}"
@@ -44,7 +65,7 @@ const QuotesPage: React.FC<Quotes> = ({ data }) => {
                             <p className='mt-4 text-xl md:text-2xl'>- {q.author}</p>
                         </div>
                     </section>
-                )}
+                )}}
             />
         </>
     );
