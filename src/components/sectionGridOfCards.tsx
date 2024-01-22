@@ -11,19 +11,24 @@ type DataObject = {
     name?: string;
     slug?: string;
     type?: string;
+    img?: string;
 };
+
+type Image = {
+    src: string;
+    alt: string;
+};
+
+type Icon = {
+    name: keyof typeof dynamicIconImports;
+    color?: string;
+    size?: string;
+}
 
 type Grid = {
     data: DataObject[];
-    image?: {
-        src: string;
-        alt: string;
-    };
-    icon?: {
-        name: keyof typeof dynamicIconImports;
-        color?: string;
-        size?: string;
-    };
+    image?: Image;
+    icon?: Icon;
     maxItems?: number;
     isShuffled?: boolean;
 };
@@ -54,7 +59,7 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                         {d.slug ? (
                             <Link href={`/${d.type ? `${d.type}/` : ''}${d.slug}`}>
                                 <CardHeader>
-                                    {image && (
+                                    {d.type === 'serveis' && image && (
                                         <Image
                                             src={image.src}
                                             alt={image.alt}
@@ -62,7 +67,7 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                                             height={48}
                                         />
                                     )}
-                                    {icon && (
+                                    {d.type === 'projectes' && icon && (
                                         <Icon
                                             name={icon.name}
                                             color={icon.color}
@@ -82,7 +87,7 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                         ) : (
                             <>
                                 <CardHeader>
-                                    {image && (
+                                    {d.type === 'serveis' && image && (
                                         <Image
                                             src={image.src}
                                             alt={image.alt}
@@ -90,19 +95,35 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                                             height={48}
                                         />
                                     )}
-                                    {icon && (
+                                    {d.type === 'projectes' && icon && (
                                         <Icon
                                             name={icon.name}
                                             color={icon.color}
                                             size={icon.size}
                                         />
                                     )}
+                                    {d.type === 'partners' && d.img && (
+                                        <Image
+                                            src={d.img}
+                                            alt={d.name}
+                                            width={192}
+                                            height={192}
+                                        />
+                                    )}
                                     <h3 className='text-lg font-bold'>{d.title}</h3>
                                 </CardHeader>
-                                {d.name && (
+                                {(d.type === 'serveis' || d.type === 'projectes') && d.name && (
                                     <CardContent>
                                         <p className='text-sm text-gray-500 dark:text-gray-400'>
                                             {d.name}
+                                        </p>
+                                    </CardContent>
+                                )}
+                                {(d.type === 'partners') && d.description && (
+                                    <CardContent>
+                                        <h3 className='text-lg font-bold'>{d.name}</h3>
+                                        <p className='text-sm text-gray-500 dark:text-gray-400'>
+                                            {d.description}
                                         </p>
                                     </CardContent>
                                 )}
