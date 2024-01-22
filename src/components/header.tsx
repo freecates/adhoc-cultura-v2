@@ -58,7 +58,7 @@ export default async function Header(): Promise<JSX.Element> {
                     </Link>
                 )}
             </nav>
-            <div className='hidden md:block'>
+            <div className='hidden lg:block'>
                 <AraCulturaButton />
             </div>
         </header>

@@ -36,7 +36,7 @@ body {
 .text-card-foreground {
   color: hsl(var(--forgroung-text));
 }
-.markdown {
+.markdown, .cms-content {
   h2 {
     @apply mt-8 text-3xl font-bold;
   }
@@ -45,5 +45,8 @@ body {
   }
   ul {
     @apply list-disc p-4;
+  }
+  a {
+    @apply underline;
   }
 }

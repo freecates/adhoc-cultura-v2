@@ -60,24 +60,62 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
             {array.map(
                 (d, index): JSX.Element => (
                     <Card key={index}>
-                        {d.slug ? (
+                        {(d.type === 'serveis' ||
+                            d.type === 'projectes' ||
+                            d.type === 'partners') &&
+                            (d.slug ? (
+                                <Link href={`/${d.type ? `${d.type}/` : ''}${d.slug}`}>
+                                    <CardHeader>
+                                        {d.type === 'serveis' && image && (
+                                            <Image
+                                                src={image.src}
+                                                alt={image.alt}
+                                                width={48}
+                                                height={48}
+                                            />
+                                        )}
+                                        {d.type === 'projectes' && icon && (
+                                            <Icon
+                                                name={icon.name}
+                                                color={icon.color}
+                                                size={icon.size}
+                                            />
+                                        )}
+                                        <h3 className='text-lg font-bold'>{d.title}</h3>
+                                    </CardHeader>
+                                    {d.name && (
+                                        <CardContent>
+                                            <p className='text-sm text-gray-500 dark:text-gray-400'>
+                                                {d.name}
+                                            </p>
+                                        </CardContent>
+                                    )}
+                                </Link>
+                            ) : (
+                                <>
+                                    <CardHeader>
+                                        {d.type === 'partners' && d.img && (
+                                            <Image
+                                                src={d.img}
+                                                alt={d.name}
+                                                width={192}
+                                                height={192}
+                                            />
+                                        )}
+                                    </CardHeader>
+                                    {d.type === 'partners' && d.description && (
+                                        <CardContent>
+                                            <h3 className='text-lg font-bold'>{d.name}</h3>
+                                            <p className='text-sm text-gray-500 dark:text-gray-400'>
+                                                {d.description}
+                                            </p>
+                                        </CardContent>
+                                    )}
+                                </>
+                            ))}
+                        {d.type === 'post' && (
                             <Link href={`/${d.type ? `${d.type}/` : ''}${d.slug}`}>
                                 <CardHeader>
-                                    {d.type === 'serveis' && image && (
-                                        <Image
-                                            src={image.src}
-                                            alt={image.alt}
-                                            width={48}
-                                            height={48}
-                                        />
-                                    )}
-                                    {d.type === 'projectes' && icon && (
-                                        <Icon
-                                            name={icon.name}
-                                            color={icon.color}
-                                            size={icon.size}
-                                        />
-                                    )}
                                     {d.type === 'post' ? (
                                         <>
                                             <h3
@@ -94,69 +132,14 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                                         <h3 className='text-lg font-bold'>{d.title}</h3>
                                     )}
                                 </CardHeader>
-                                {d.name && (
+                                {d.acf.destacat && (
                                     <CardContent>
                                         <p className='text-sm text-gray-500 dark:text-gray-400'>
-                                            {d.name}
+                                            {d.acf.destacat}
                                         </p>
-                                    </CardContent>
-                                )}
-                                {d.excerpt && (
-                                    <CardContent>
-                                        {d.excerpt && (
-                                            <div
-                                                className='text-sm text-gray-500 dark:text-gray-400'
-                                                dangerouslySetInnerHTML={{
-                                                    __html: d.excerpt.rendered,
-                                                }}
-                                            />
-                                        )}
                                     </CardContent>
                                 )}{' '}
                             </Link>
-                        ) : (
-                            <>
-                                <CardHeader>
-                                    {d.type === 'serveis' && image && (
-                                        <Image
-                                            src={image.src}
-                                            alt={image.alt}
-                                            width={48}
-                                            height={48}
-                                        />
-                                    )}
-                                    {d.type === 'projectes' && icon && (
-                                        <Icon
-                                            name={icon.name}
-                                            color={icon.color}
-                                            size={icon.size}
-                                        />
-                                    )}
-                                    {d.type === 'partners' && d.img && (
-                                        <Image src={d.img} alt={d.name} width={192} height={192} />
-                                    )}
-                                    {d.type === 'posts' ? (
-                                        <h3 className='text-lg font-bold'>{d.title.rendered}</h3>
-                                    ) : (
-                                        <h3 className='text-lg font-bold'>{d.title}</h3>
-                                    )}
-                                </CardHeader>
-                                {(d.type === 'serveis' || d.type === 'projectes') && d.name && (
-                                    <CardContent>
-                                        <p className='text-sm text-gray-500 dark:text-gray-400'>
-                                            {d.name}
-                                        </p>
-                                    </CardContent>
-                                )}
-                                {d.type === 'partners' && d.description && (
-                                    <CardContent>
-                                        <h3 className='text-lg font-bold'>{d.name}</h3>
-                                        <p className='text-sm text-gray-500 dark:text-gray-400'>
-                                            {d.description}
-                                        </p>
-                                    </CardContent>
-                                )}
-                            </>
                         )}
                     </Card>
                 ),
