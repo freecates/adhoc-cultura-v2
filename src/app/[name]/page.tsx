@@ -48,5 +48,5 @@ const getData = async (params: string): Promise<any> => {
 };
 
 export const generateStaticParams = async (): Promise<{ name: string }[]> => {
-    return [{ name: 'projectes' }, { name: 'serveis' }];
+    return [{ name: 'projectes' }, { name: 'serveis' }, { name: 'partners' }];
 };
