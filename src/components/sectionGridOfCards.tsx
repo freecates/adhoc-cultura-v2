@@ -2,12 +2,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Icon from './ui/icon';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
-import { shuffleArray } from '@/lib/utils';
+import { dateToLocale, shuffleArray } from '@/lib/utils';
 import { CardHeader, CardContent, Card } from '@/components/ui/card';
 import { Button } from './ui/button';
 
 type DataObject = {
-    title: string;
+    title:
+        | string
+        | {
+              rendered: TrustedHTML;
+          };
     name?: string;
     slug?: string;
     type?: string;
@@ -23,7 +27,7 @@ type Icon = {
     name: keyof typeof dynamicIconImports;
     color?: string;
     size?: string;
-}
+};
 
 type Grid = {
     data: DataObject[];
@@ -55,7 +59,7 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
         >
             {array.map(
                 (d, index): JSX.Element => (
-                    <Card key={index + d.title}>
+                    <Card key={index}>
                         {d.slug ? (
                             <Link href={`/${d.type ? `${d.type}/` : ''}${d.slug}`}>
                                 <CardHeader>
@@ -74,13 +78,39 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                                             size={icon.size}
                                         />
                                     )}
-                                    <h3 className='text-lg font-bold'>{d.title}</h3>
+                                    {d.type === 'post' ? (
+                                        <>
+                                            <h3
+                                                className='text-lg font-bold'
+                                                dangerouslySetInnerHTML={{
+                                                    __html: d.title.rendered,
+                                                }}
+                                            />
+                                            <p>
+                                                <small>{dateToLocale(d.date, 'ca')}</small>
+                                            </p>
+                                        </>
+                                    ) : (
+                                        <h3 className='text-lg font-bold'>{d.title}</h3>
+                                    )}
                                 </CardHeader>
                                 {d.name && (
                                     <CardContent>
                                         <p className='text-sm text-gray-500 dark:text-gray-400'>
                                             {d.name}
                                         </p>
+                                    </CardContent>
+                                )}
+                                {d.excerpt && (
+                                    <CardContent>
+                                        {d.excerpt && (
+                                            <div
+                                                className='text-sm text-gray-500 dark:text-gray-400'
+                                                dangerouslySetInnerHTML={{
+                                                    __html: d.excerpt.rendered,
+                                                }}
+                                            />
+                                        )}
                                     </CardContent>
                                 )}{' '}
                             </Link>
@@ -103,14 +133,13 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                                         />
                                     )}
                                     {d.type === 'partners' && d.img && (
-                                        <Image
-                                            src={d.img}
-                                            alt={d.name}
-                                            width={192}
-                                            height={192}
-                                        />
+                                        <Image src={d.img} alt={d.name} width={192} height={192} />
                                     )}
-                                    <h3 className='text-lg font-bold'>{d.title}</h3>
+                                    {d.type === 'posts' ? (
+                                        <h3 className='text-lg font-bold'>{d.title.rendered}</h3>
+                                    ) : (
+                                        <h3 className='text-lg font-bold'>{d.title}</h3>
+                                    )}
                                 </CardHeader>
                                 {(d.type === 'serveis' || d.type === 'projectes') && d.name && (
                                     <CardContent>
@@ -119,7 +148,7 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                                         </p>
                                     </CardContent>
                                 )}
-                                {(d.type === 'partners') && d.description && (
+                                {d.type === 'partners' && d.description && (
                                     <CardContent>
                                         <h3 className='text-lg font-bold'>{d.name}</h3>
                                         <p className='text-sm text-gray-500 dark:text-gray-400'>
