@@ -36,7 +36,7 @@ export default async function Header(): Promise<JSX.Element> {
                 </Link>
             </div>
 
-            <nav className='w-full sm:max-md:max-w-[320px] md:max-w-2xl uppercase overflow-x-auto my-2 md:my-0 md:ml-auto md:mr-4 flex items-center justify-between gap-4 sm:gap-6'>
+            <nav className='w-full sm:max-md:max-w-[320px] md:max-w-2xl uppercase overflow-x-auto my-4 md:my-0 md:ml-auto md:mr-4 flex items-center justify-between gap-4 sm:gap-6'>
                 {textRoutes.map(
                     (r, index): JSX.Element => (
                         <Link
