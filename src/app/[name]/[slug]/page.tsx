@@ -144,7 +144,7 @@ export async function generateStaticParams() {
         name: s.type,
         slug: s.slug,
     }));
-    const postsStaticParams = posts?.data?.map((s: { slug: string; type: string }) => ({
+    const postsStaticParams = posts?.map((s: { slug: string; type: string }) => ({
         name: s.type,
         slug: s.slug,
     }));
