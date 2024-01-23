@@ -131,8 +131,11 @@ const getData = async ({ name, slug }: { name: string; slug: string }): Promise<
 };
 
 export async function generateStaticParams() {
-    const serveis = await api.adhocCulturaData.getData('json', 'serveis');
-    const projectes = await api.adhocCulturaData.getData('json', 'projectes');
+    const [serveis, projectes, posts] = await Promise.all([
+        api.adhocCulturaData.getData('json', 'serveis'),
+        api.adhocCulturaData.getData('json', 'projectes'),
+        api.adhocCulturaData.getData('cms', undefined, 'posts'),
+    ]);
     const serviesStaticParams = serveis?.data?.map((s: { slug: string; type: string }) => ({
         name: s.type,
         slug: s.slug,
@@ -141,5 +144,9 @@ export async function generateStaticParams() {
         name: s.type,
         slug: s.slug,
     }));
-    return [...serviesStaticParams, ...projectesStaticParams];
+    const postsStaticParams = posts?.data?.map((s: { slug: string; type: string }) => ({
+        name: s.type,
+        slug: s.slug,
+    }));
+    return [...serviesStaticParams, ...projectesStaticParams, ...postsStaticParams];
 }
