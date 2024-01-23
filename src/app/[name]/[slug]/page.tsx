@@ -13,6 +13,7 @@ type SlugPageData = {
     img: string;
     slug: string;
     description: TrustedHTML;
+    type: string;
 };
 
 type SlugCmsData = {
@@ -27,6 +28,7 @@ type SlugCmsData = {
     content: {
         rendered: TrustedHTML;
     };
+    type: string;
 };
 type PageDataProps = {
     pageData: {
@@ -55,6 +57,9 @@ export default async function Servei({ params }: { params: { name: string; slug:
                     trustedHTMLtitle={slugCmsContentData?.title?.rendered}
                     date={slugCmsContentData?.date}
                     destacat={slugCmsContentData?.acf?.destacat}
+                    slug={slug}
+                    cmsType={slugCmsContentData?.type}
+                    pageType={slugPageData?.type}
                 />
                 {slugPageData?.description && (
                     <>

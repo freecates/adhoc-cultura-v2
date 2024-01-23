@@ -1,5 +1,6 @@
 import { dateToLocale, shimmer, toBase64 } from '@/lib/utils';
 import Image from 'next/image';
+import SocialSharer from './socialSharer';
 
 const SectionPageHeader: React.FC<{
     title?: string;
@@ -8,7 +9,10 @@ const SectionPageHeader: React.FC<{
     img?: string;
     date?: string;
     destacat?: string;
-}> = ({ title, trustedHTMLtitle, name, img, date, destacat }) => {
+    slug: string;
+    cmsType?: string;
+    pageType?: string;
+}> = ({ title, trustedHTMLtitle, name, img, date, destacat, slug, cmsType, pageType }) => {
     return (
         <section className='w-full pt-12 md:pt-24 lg:pt-32 border-b'>
             <div className='px-4 md:px-6 space-y-10 xl:space-y-16'>
@@ -39,6 +43,12 @@ const SectionPageHeader: React.FC<{
                             <p className='text-gray-400 md:text-xl dark:text-gray-400'>
                                 {destacat}
                             </p>
+                        )}
+                        {cmsType && destacat && (
+                            <SocialSharer type={cmsType} slug={slug} title={destacat} />
+                        )}
+                        {pageType && title && (
+                            <SocialSharer type={pageType} slug={slug} title={title} />
                         )}
                     </div>
                 </div>
