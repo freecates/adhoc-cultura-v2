@@ -32,7 +32,7 @@ export default async function Contacte(): Promise<JSX.Element> {
                     </div>
                 </div>
                 <div className='md:px-6 space-y-10 xl:space-y-16'>
-                    <div className='mx-auto max-w-[1300px] h-[640px] text-gray-600'>
+                    <div className='mx-auto max-w-[1300px] h-[480px] md:h-[640px] text-gray-600'>
                         <GoogleMap latLng={latLng} address={address} code={code} city={city} tel={tel} mail={mail} name={name} />
                     </div>
                 </div>
