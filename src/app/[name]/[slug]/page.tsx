@@ -60,6 +60,7 @@ export default async function Servei({ params }: { params: { name: string; slug:
                     slug={slug}
                     cmsType={slugCmsContentData?.type}
                     pageType={slugPageData?.type}
+                    withBorder
                 />
                 {slugPageData?.description && (
                     <>
