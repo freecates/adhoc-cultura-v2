@@ -41,11 +41,10 @@ const GridOfImages: React.FC<Grid> = ({ data, isShuffled, maxItems, cols }) => {
     } else {
         array = maxItems ? data.slice(0, maxItems) : data;
     }
-    const xlCols = array.length >= 3 ? 'xl:grid-cols-3' : '';
     const maxCols = cols ? xlGridCols(cols) : 'xl:grid-cols-3';
 
     return (  
-        <div className={`mx-auto grid max-w-5xl xl:max-w-7xl items-center gap-6 py-12 lg:grid-cols-2 ${xlCols} ${maxCols} lg:gap-12`}>
+        <div className={`mx-auto grid max-w-5xl xl:max-w-7xl items-center gap-6 py-12 lg:grid-cols-2 ${maxCols} lg:gap-12`}>
             {array.map((d, index): JSX.Element => (
                 <Image
                     key={index + d.name}
