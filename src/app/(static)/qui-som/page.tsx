@@ -31,9 +31,9 @@ export default async function QuiSom() {
     return (
         <main className='flex-1'>
             <SectionPageHeader slug='qui-som' title={title} name={description} />
-            <SectionGripOfImages title={'Equip'} data={gridData(team)} />
-            <SectionGripOfImages title={'Socis estratègics '} data={gridData(partner)} />
-            <SectionGripOfImages title={'Col·laboradors '} data={gridData(collaborator)} />
+            <SectionGripOfImages title={'Equip'} data={gridData(team)} cols={2} />
+            <SectionGripOfImages title={'Socis estratègics '} data={gridData(partner)} cols={3} />
+            <SectionGripOfImages title={'Col·laboradors '} data={gridData(collaborator)} cols={3} />
         </main>
     );
 }
