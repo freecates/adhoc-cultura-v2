@@ -11,6 +11,7 @@ type SlugPageData = {
     title: string;
     name: string;
     img: string;
+    photo: string;
     slug: string;
     description: TrustedHTML;
     type: string;
@@ -42,9 +43,11 @@ type PageDataProps = {
 
 export default async function Servei({ params }: { params: { name: string; slug: string } }) {
     const { name, slug } = params;
-    const { pageData, mdContent, cmsContent }: PageDataProps = await getData({ name, slug });
+    const fileName = name === "team" || name === "partner" || name === "collaborator" ? "equip" : name; 
+    const { pageData, mdContent, cmsContent }: PageDataProps = await getData({ fileName, slug });
     const { data, image, icon } = pageData ?? {};
     const slugPageData = data?.find((s: SlugPageData) => s.slug === slug);
+    const slugPageDataImage = slugPageData?.img || slugPageData?.photo;
     const slugCmsContentData = cmsContent?.find((s: SlugCmsData) => s.slug === slug);
 
     return (
@@ -53,13 +56,14 @@ export default async function Servei({ params }: { params: { name: string; slug:
                 <SectionPageHeader
                     title={slugPageData?.title}
                     name={slugPageData?.name}
-                    img={slugPageData?.img}
+                    img={slugPageDataImage}
                     trustedHTMLtitle={slugCmsContentData?.title?.rendered}
                     date={slugCmsContentData?.date}
                     destacat={slugCmsContentData?.acf?.destacat}
                     slug={slug}
                     cmsType={slugCmsContentData?.type}
                     pageType={slugPageData?.type}
+                    withBorder
                 />
                 {slugPageData?.description && (
                     <>
@@ -122,9 +126,9 @@ export default async function Servei({ params }: { params: { name: string; slug:
     );
 }
 
-const getData = async ({ name, slug }: { name: string; slug: string }): Promise<any> => {
+const getData = async ({ fileName, slug }: { fileName: string; slug: string }): Promise<any> => {
     const [pageData, mdContent, cmsContent] = await Promise.all([
-        api.adhocCulturaData.getData('json', name),
+        api.adhocCulturaData.getData('json', fileName),
         api.adhocCulturaData.getData('md', slug),
         api.adhocCulturaData.getData('cms', undefined, 'posts'),
     ]);
