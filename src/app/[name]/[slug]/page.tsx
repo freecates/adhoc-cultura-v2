@@ -45,9 +45,7 @@ export default async function Servei({ params }: { params: { name: string; slug:
     const { name, slug } = params;
     const fileName = name === "team" || name === "partner" || name === "collaborator" ? "equip" : name; 
     const { pageData, mdContent, cmsContent }: PageDataProps = await getData({ fileName, slug });
-    console.log(pageData);
     const { data, image, icon } = pageData ?? {};
-    console.log(image, icon);
     const slugPageData = data?.find((s: SlugPageData) => s.slug === slug);
     const slugPageDataImage = slugPageData?.img || slugPageData?.photo;
     const slugCmsContentData = cmsContent?.find((s: SlugCmsData) => s.slug === slug);

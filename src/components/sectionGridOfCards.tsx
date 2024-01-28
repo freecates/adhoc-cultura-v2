@@ -63,6 +63,8 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                         {(d.type === 'serveis' ||
                             d.type === 'projectes' ||
                             d.type === 'team' ||
+                            d.type === 'partner' ||
+                            d.type === 'collaborator' ||
                             d.type === 'partners') &&
                             (d.slug ? (
                                 <Link href={`/${d.type ? `${d.type}/` : ''}${d.slug}`}>

@@ -4,7 +4,7 @@ import SectionPageHeader from '@/components/sectionPageHeader';
 import api from '@/lib/api';
 
 type Data = {
-    name: string;
+    title: string;
     photo: string;
     type: string;
     slug: string;
@@ -24,9 +24,9 @@ export default async function QuiSom() {
     const team = data.filter((d): d is Data => d.type === 'team');
     const partner = data.filter((d): d is Data => d.type === 'partner');
     const collaborator = data.filter((d): d is Data => d.type === 'collaborator');
-    const gridData = (type: { name: string; photo: string; slug: string; type: string }[]): { name: string; logo: string; route?: string }[] =>
-        type.map(({ name, photo, slug, type }): { name: string; logo: string; route: string } => ({
-            name,
+    const gridData = (type: { title: string; photo: string; slug: string; type: string }[]): { name: string; logo: string; route?: string }[] =>
+        type.map(({ title, photo, slug, type }): { name: string; logo: string; route: string } => ({
+            name: title,
             logo: photo,
             route: `/${type}/${slug}`,
         }));
