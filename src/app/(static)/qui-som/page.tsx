@@ -7,6 +7,7 @@ type Data = {
     name: string;
     photo: string;
     type: string;
+    slug: string;
 };
 
 type QuiSomProps = {
@@ -23,10 +24,11 @@ export default async function QuiSom() {
     const team = data.filter((d): d is Data => d.type === 'team');
     const partner = data.filter((d): d is Data => d.type === 'partner');
     const collaborator = data.filter((d): d is Data => d.type === 'collaborator');
-    const gridData = (type: { name: string; photo: string }[]): { name: string; logo: string }[] =>
-        type.map(({ name, photo }): { name: string; logo: string } => ({
+    const gridData = (type: { name: string; photo: string; slug: string; type: string }[]): { name: string; logo: string; route?: string }[] =>
+        type.map(({ name, photo, slug, type }): { name: string; logo: string; route: string } => ({
             name,
             logo: photo,
+            route: `/${type}/${slug}`,
         }));
     return (
         <main className='flex-1'>

@@ -62,6 +62,7 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                     <Card key={index}>
                         {(d.type === 'serveis' ||
                             d.type === 'projectes' ||
+                            d.type === 'team' ||
                             d.type === 'partners') &&
                             (d.slug ? (
                                 <Link href={`/${d.type ? `${d.type}/` : ''}${d.slug}`}>
@@ -74,7 +75,7 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                                                 height={48}
                                             />
                                         )}
-                                        {d.type === 'projectes' && icon && (
+                                        {(d.type === 'projectes' || d.type === 'team') && icon && (
                                             <Icon
                                                 name={icon.name}
                                                 color={icon.color}
