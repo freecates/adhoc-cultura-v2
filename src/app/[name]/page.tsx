@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import api from '@/lib/api';
-import SectionGripOfCards from '@/components/sectionGridOfCards';
+import SectionGridOfCards from '@/components/sectionGridOfCards';
 
 type Data = {
     title: string;
@@ -29,7 +29,7 @@ export default async function Name({ params }: { params: { name: string } }): Pr
     const { title, description, image, icon, data } = pageData;
     return (
         <main className='flex-1'>
-            <SectionGripOfCards
+            <SectionGridOfCards
                 title={title}
                 description={description}
                 data={data}

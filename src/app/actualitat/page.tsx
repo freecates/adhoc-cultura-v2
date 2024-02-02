@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import api from '@/lib/api';
-import SectionGripOfCards from '@/components/sectionGridOfCards';
+import SectionGridOfCards from '@/components/sectionGridOfCards';
 
 type Data = {
     title: {
@@ -20,7 +20,7 @@ export default async function Name(): Promise<JSX.Element> {
     const { pageData }: NameProps = await getData();
     return (
         <main className='flex-1'>
-            <SectionGripOfCards
+            <SectionGridOfCards
                 title={'Actualitat'}
                 description={`L'actualitat d'Adhoc Cultura`}
                 data={pageData}

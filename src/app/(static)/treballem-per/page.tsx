@@ -1,6 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 import dynamicIconImports from "lucide-react/dynamicIconImports"
 import api from '@/lib/api';
 import SectionGripOfImages from '@/components/sectionGridOfImages';
+import TestimonialsSection from "@/components/testimonials";
 
 type Data = {
     title: string;
@@ -28,6 +30,7 @@ export default async function TreballemPer() {
     return (
         <main className='flex-1'>
             <SectionGripOfImages title={'Treballem per'} data={clients} />
+            <TestimonialsSection />
         </main>
     );
 }

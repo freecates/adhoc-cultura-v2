@@ -1,5 +1,5 @@
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
-import SectionGripOfCards from '@/components/sectionGridOfCards';
+import SectionGridOfCards from '@/components/sectionGridOfCards';
 import api from '@/lib/api';
 
 type Data = {
@@ -29,7 +29,7 @@ export default async function StaticGroupLayout({ children }: { children: React.
         <>
             {children}
             <div className='bg-gray-950'>
-                <SectionGripOfCards title={'Destaquem'} data={projectes.data} icon={projectes.icon} isShuffled maxItems={2} buttonText={"Veure'n més"} buttonLink={"/projectes"} />
+                <SectionGridOfCards title={'Destaquem'} data={projectes.data} icon={projectes.icon} isShuffled maxItems={2} buttonText={"Veure'n més"} buttonLink={"/projectes"} />
             </div>
         </>
     );
