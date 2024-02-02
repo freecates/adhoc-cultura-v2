@@ -128,6 +128,7 @@ export async function Landing(): Promise<JSX.Element> {
               data={clients}
               isShuffled
               maxItems={2}
+              cols={2}
               buttonText={"Veure'n més"}
               buttonLink={'/treballem-per'}
           />
