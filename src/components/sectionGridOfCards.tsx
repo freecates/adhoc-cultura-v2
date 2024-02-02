@@ -153,7 +153,7 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
 
 export { GridOfCards };
 
-const SectionGripOfCards: React.FC<ISectionProps> = ({
+const SectionGridOfCards: React.FC<ISectionProps> = ({
     title,
     description,
     data,
@@ -198,4 +198,4 @@ const SectionGripOfCards: React.FC<ISectionProps> = ({
     );
 };
 
-export default SectionGripOfCards;
+export default SectionGridOfCards;

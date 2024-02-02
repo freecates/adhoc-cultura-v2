@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import api from "@/lib/api"
 import { shimmer, toBase64 } from "@/lib/utils"
-import SectionGripOfCards from "./sectionGridOfCards"
+import SectionGridOfCards from "./sectionGridOfCards"
 import SectionGripOfImages from "./sectionGridOfImages"
 import dynamicIconImports from "lucide-react/dynamicIconImports"
 import Link from 'next/link';
@@ -70,7 +70,7 @@ export async function Landing(): Promise<JSX.Element> {
                   />
               </div>
           </section>
-          <SectionGripOfCards
+          <SectionGridOfCards
               title={projectes.title}
               description={`Selecció de ${projectes.description}`}
               data={projectes.data}
@@ -80,7 +80,7 @@ export async function Landing(): Promise<JSX.Element> {
               buttonText={"Veure'n més"}
               buttonLink={'/projectes'}
           />
-          <SectionGripOfCards
+          <SectionGridOfCards
               title={serveis?.title}
               description={
                   'Estem especialitzats en un conjunt de serveris culturals creatius per ajudar-vos a reixir.'
@@ -95,7 +95,7 @@ export async function Landing(): Promise<JSX.Element> {
                           Testimonis
                       </h2>
                       <p className='mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400'>
-                          No us cregueu només la nostra paraula, escolteu la dels nostres clients.
+                          Què diuen de nosaltres?
                       </p>
                   </div>
                   <div className='mx-auto w-full max-w-sm space-y-2'>
@@ -128,6 +128,7 @@ export async function Landing(): Promise<JSX.Element> {
               data={clients}
               isShuffled
               maxItems={2}
+              cols={2}
               buttonText={"Veure'n més"}
               buttonLink={'/treballem-per'}
           />
