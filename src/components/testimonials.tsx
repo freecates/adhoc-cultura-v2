@@ -3,23 +3,41 @@ import api from '@/lib/api';
 import { Badge } from './ui/badge';
 import { Card, CardContent } from './ui/card';
 
-const Testimonials = ({ data }: any) => {
-    return (
-        data.map((item: any) => (
-            <Card key={item.id}>
+type Data = {
+    quote: string;
+    name: string;
+    title: string;
+};
+
+type TestimonialsProps = {
+    data: Data[];
+};
+
+type TestimonialsSectionProps = {
+    testimonis: {
+        title: string;
+        description: string;
+        data: Data[];
+    };
+};
+
+const Testimonials = ({ data }: TestimonialsProps): JSX.Element[] => {
+    return data.map(
+        (item: Data): JSX.Element => (
+            <Card key={item.title}>
                 <CardContent>
-                    <p className='text-sm text-gray-500 dark:text-gray-400 p-4'>
-                        "{item.quote}"
-                    </p>
-                    <Badge>{item.name}, {item.title}</Badge>
+                    <p className='text-sm text-gray-500 dark:text-gray-400 p-4'>"{item.quote}"</p>
+                    <Badge>
+                        {item.name}, {item.title}
+                    </Badge>
                 </CardContent>
             </Card>
-        ))
+        ),
     );
 };
 
 const TestimonialsSection = async () => {
-    const { testimonis } = await getData();
+    const { testimonis }: TestimonialsSectionProps = await getData();
     const { title, description, data } = testimonis;
     return (
         <section className='w-full py-12 md:py-24 lg:py-32 bg-gray-800 text-white'>
