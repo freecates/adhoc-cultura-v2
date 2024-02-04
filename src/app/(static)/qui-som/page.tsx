@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import type { Metadata } from 'next'
 import SectionGripOfImages from '@/components/sectionGridOfImages';
 import SectionPageHeader from '@/components/sectionPageHeader';
 import api from '@/lib/api';
@@ -40,7 +41,21 @@ export default async function QuiSom() {
     );
 }
 
+const generateMetadata = async (): Promise<Metadata> => {
+    const [equip] = await Promise.all([api.adhocCulturaData.getData('json', 'equip')]);
+    const { title, description } = equip;
+    return {
+        title,
+        description,
+        alternates: {
+            canonical: 'https://adhoc-cultura.com/qui-som',
+        },
+    };
+};
+
 const getData = async (): Promise<any> => {
     const [equip] = await Promise.all([api.adhocCulturaData.getData('json', 'equip')]);
     return { equip };
 };
+
+export { generateMetadata };

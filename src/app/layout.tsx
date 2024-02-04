@@ -7,9 +7,18 @@ import Footer from '@/components/footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Adhoc Cultura',
-  description: 'La cultura com a motor econòmic i social. Desenvolupem projectes per promocionar la cultura i apropar-la a la societat.',
-}
+    title: { default: 'Adhoc Cultura', template: `%s | Adhoc Cultura` },
+    description:
+        'La cultura com a motor econòmic i social. Treballem perquè totes les persones puguin gaudir dels beneficis de la cultura',
+    alternates: {
+        canonical: 'https://adhoc-cultura.com/',
+    },
+    icons: {
+        icon: '/favicon.ico',
+        shortcut: '/icons/android-chrome-96x96.png',
+        apple: '/icons/android-chrome-192x192.png',
+    },
+};
 
 export default function RootLayout({
   children,
