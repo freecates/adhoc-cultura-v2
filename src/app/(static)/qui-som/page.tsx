@@ -43,10 +43,10 @@ export default async function QuiSom() {
 
 const generateMetadata = async (): Promise<Metadata> => {
     const [equip] = await Promise.all([api.adhocCulturaData.getData('json', 'equip')]);
-    const { title, description } = equip;
+    const { title, description, data } = equip;
     return {
         title,
-        description,
+        description: description + ' | ' + data.map(({ title }: { title: string }): string => title).join(', '),
         alternates: {
             canonical: 'https://adhoc-cultura.com/qui-som',
         },

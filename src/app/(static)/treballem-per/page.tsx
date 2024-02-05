@@ -3,6 +3,7 @@ import dynamicIconImports from "lucide-react/dynamicIconImports"
 import api from '@/lib/api';
 import SectionGripOfImages from '@/components/sectionGridOfImages';
 import TestimonialsSection from "@/components/testimonials";
+import { Metadata } from "next";
 
 type Data = {
     title: string;
@@ -34,6 +35,17 @@ export default async function TreballemPer() {
         </main>
     );
 }
+
+export const generateMetadata = async (): Promise<Metadata> => {
+    const [clients] = await Promise.all([api.adhocCulturaData.getData('json', 'clients')]);
+    return {
+        title: 'Treballem per',
+        description: clients.map(({ name }: { name: string }): string => name).join(', '),
+        alternates: {
+            canonical: 'https://adhoc-cultura.com/treballem-per',
+        },
+    };
+};
 
 const getData = async (): Promise<any> => {
   const [clients] = await Promise.all([api.adhocCulturaData.getData('json', 'clients')]);

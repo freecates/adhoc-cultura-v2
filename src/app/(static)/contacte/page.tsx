@@ -2,6 +2,7 @@
 import GoogleMap from '@/components/map';
 import SectionPageHeader from '@/components/sectionPageHeader';
 import api from '@/lib/api';
+import { Metadata } from 'next';
 
 type Contact = {
     name: string;
@@ -36,6 +37,19 @@ export default async function Contacte(): Promise<JSX.Element> {
         </main>
     );
 }
+
+export const generateMetadata = async (): Promise<Metadata> => {
+    const [contact] = await Promise.all([api.adhocCulturaData.getData('json', 'contact')]);
+    const { name, address, code, city } = contact[0];
+
+    return {
+        title: name,
+        description: `${address}, ${code} ${city}`,
+        alternates: {
+            canonical: 'https://adhoc-cultura.com/contacte',
+        },
+    };
+};
 
 const getData = async (): Promise<any> => {
     const [contact] = await Promise.all([api.adhocCulturaData.getData('json', 'contact')]);

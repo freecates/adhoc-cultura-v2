@@ -2,6 +2,7 @@
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import api from '@/lib/api';
 import SectionGridOfCards from '@/components/sectionGridOfCards';
+import { Metadata } from 'next';
 
 type Data = {
     title: {
@@ -16,18 +17,31 @@ type NameProps = {
     pageData:  Data[];
 };
 
+const actualitat = {
+    title: 'Actualitat',
+    description: 'L\'actualitat d\'Adhoc Cultura',
+}
+
 export default async function Name(): Promise<JSX.Element> {
     const { pageData }: NameProps = await getData();
     return (
         <main className='flex-1'>
             <SectionGridOfCards
-                title={'Actualitat'}
-                description={`L'actualitat d'Adhoc Cultura`}
+                title={actualitat.title}
+                description={actualitat.description}
                 data={pageData}
             />
         </main>
     );
 }
+
+export const metadata: Metadata = {
+    title: actualitat.title,
+    description: actualitat.description,
+    alternates: {
+        canonical: 'https://adhoc-cultura.com/actualitat',
+    },
+};
 
 const getData = async (): Promise<any> => {
     const [pageData] = await Promise.all([api.adhocCulturaData.getData('cms', undefined, 'posts')]);

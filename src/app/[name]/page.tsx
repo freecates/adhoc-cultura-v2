@@ -2,6 +2,7 @@
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import api from '@/lib/api';
 import SectionGridOfCards from '@/components/sectionGridOfCards';
+import { Metadata } from 'next';
 
 type Data = {
     title: string;
@@ -39,6 +40,20 @@ export default async function Name({ params }: { params: { name: string } }): Pr
         </main>
     );
 }
+
+export const generateMetadata = async ({ params }: { params: { name: string } }): Promise<Metadata> => {
+    const [meta] = await Promise.all([api.adhocCulturaData.getData('json', params?.name)]);
+    const { title, description, data } = meta;
+    const titlesFromArray = data.map(({ title }: { title: string }): string => title);
+    const titles = [...new Set<string>(titlesFromArray)];
+    return {
+        title,
+        description: description + ' | ' + titles?.join(', '),
+        alternates: {
+            canonical: `https://adhoc-cultura.com/${params.name}`,
+        },
+    };
+};
 
 const getData = async (params: string): Promise<any> => {
     const [pageData] = await Promise.all([api.adhocCulturaData.getData('json', params)]);

@@ -35,8 +35,8 @@ export default async function Metode() {
 }
 
 const generateMetadata = async (): Promise<Metadata> => {
-    const [equip] = await Promise.all([api.adhocCulturaData.getData('json', 'metode')]);
-    const { title, name } = equip;
+    const [metode] = await Promise.all([api.adhocCulturaData.getData('json', 'metode')]);
+    const { title, name } = metode;
     return {
         title,
         description: name,

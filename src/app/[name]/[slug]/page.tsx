@@ -6,6 +6,7 @@ import { dateToLocale, shimmer, toBase64 } from '@/lib/utils';
 import Image from 'next/image';
 import Animate from '@/components/animate';
 import SectionPageHeader from '@/components/sectionPageHeader';
+import { Metadata } from 'next';
 
 type SlugPageData = {
     title: string;
@@ -41,10 +42,15 @@ type PageDataProps = {
     cmsContent: SlugCmsData[];
 };
 
+const fileName = (name: string): string =>
+    name === 'team' || name === 'partner' || name === 'collaborator' ? 'equip' : name;
+
 export default async function Servei({ params }: { params: { name: string; slug: string } }) {
     const { name, slug } = params;
-    const fileName = name === "team" || name === "partner" || name === "collaborator" ? "equip" : name; 
-    const { pageData, mdContent, cmsContent }: PageDataProps = await getData({ fileName, slug });
+    const { pageData, mdContent, cmsContent }: PageDataProps = await getData({
+        fileName: fileName(name),
+        slug,
+    });
     const { data, image, icon } = pageData ?? {};
     const slugPageData = data?.find((s: SlugPageData) => s.slug === slug);
     const slugPageDataImage = slugPageData?.img || slugPageData?.photo;
@@ -125,6 +131,28 @@ export default async function Servei({ params }: { params: { name: string; slug:
         </Animate>
     );
 }
+
+export const generateMetadata = async ({
+    params,
+}: {
+    params: { name: string; slug: string };
+}): Promise<Metadata> => {
+    const { name, slug } = params;
+    const [jsonMeta, cmsMeta] = await Promise.all([
+        api.adhocCulturaData.getData('json', fileName(name)),
+        api.adhocCulturaData.getData('cms', undefined, 'posts'),
+    ]);
+    const { data } = jsonMeta ?? {};
+    const slugPageData = data?.find((s: SlugPageData): boolean => s.slug === slug);
+    const slugCmsContentData = cmsMeta?.find((s: SlugCmsData): boolean => s.slug === slug);
+    return {
+        title: slugPageData?.title || slugCmsContentData?.title?.rendered || '',
+        description: slugPageData?.name || slugCmsContentData?.acf?.destacat || '',
+        alternates: {
+            canonical: `https://adhoc-cultura.com/${name}/${slug}`,
+        },
+    };
+};
 
 const getData = async ({ fileName, slug }: { fileName: string; slug: string }): Promise<any> => {
     const [pageData, mdContent, cmsContent] = await Promise.all([
