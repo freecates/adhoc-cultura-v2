@@ -1,9 +1,7 @@
 import MdFileContent from "@/components/mdFileContent";
 import { GridOfCards } from "@/components/sectionGridOfCards";
 import dynamicIconImports from "lucide-react/dynamicIconImports";
-import api from "@/lib/api";
-import { dateToLocale, shimmer, toBase64 } from '@/lib/utils';
-import Image from 'next/image';
+import api from '@/lib/api';
 import Animate from '@/components/animate';
 import SectionPageHeader from '@/components/sectionPageHeader';
 import { Metadata } from 'next';
@@ -20,7 +18,7 @@ type SlugPageData = {
 
 type SlugCmsData = {
     title: {
-        rendered: TrustedHTML;
+        rendered: string;
     };
     slug: string;
     acf: {
@@ -47,14 +45,8 @@ const fileName = (name: string): string =>
 
 export default async function Servei({ params }: { params: { name: string; slug: string } }) {
     const { name, slug } = params;
-    const { pageData, mdContent, cmsContent }: PageDataProps = await getData({
-        fileName: fileName(name),
-        slug,
-    });
-    const { data, image, icon } = pageData ?? {};
-    const slugPageData = data?.find((s: SlugPageData) => s.slug === slug);
-    const slugPageDataImage = slugPageData?.img || slugPageData?.photo;
-    const slugCmsContentData = cmsContent?.find((s: SlugCmsData) => s.slug === slug);
+    const { data, image, icon, slugPageData, slugPageDataImage, slugCmsContentData, mdContent } =
+        await getPageData({ name, slug });
 
     return (
         <Animate>
@@ -138,13 +130,7 @@ export const generateMetadata = async ({
     params: { name: string; slug: string };
 }): Promise<Metadata> => {
     const { name, slug } = params;
-    const [jsonMeta, cmsMeta] = await Promise.all([
-        api.adhocCulturaData.getData('json', fileName(name)),
-        api.adhocCulturaData.getData('cms', undefined, 'posts'),
-    ]);
-    const { data } = jsonMeta ?? {};
-    const slugPageData = data?.find((s: SlugPageData): boolean => s.slug === slug);
-    const slugCmsContentData = cmsMeta?.find((s: SlugCmsData): boolean => s.slug === slug);
+    const { slugPageData, slugCmsContentData } = await getPageData({ name, slug });
     return {
         title: slugPageData?.title || slugCmsContentData?.title?.rendered || '',
         description: slugPageData?.name || slugCmsContentData?.acf?.destacat || '',
@@ -164,6 +150,27 @@ const getData = async ({ fileName, slug }: { fileName: string; slug: string }): 
         pageData,
         mdContent,
         cmsContent,
+    };
+};
+
+const getPageData = async ({ name, slug }: { name: string; slug: string }) => {
+    const { pageData, mdContent, cmsContent }: PageDataProps = await getData({
+        fileName: fileName(name),
+        slug,
+    });
+    const { data, image, icon } = pageData ?? {};
+    const slugPageData = data?.find((s: SlugPageData) => s.slug === slug);
+    const slugPageDataImage = slugPageData?.img || slugPageData?.photo;
+    const slugCmsContentData = cmsContent?.find((s: SlugCmsData) => s.slug === slug);
+
+    return {
+        data,
+        image,
+        icon,
+        slugPageData,
+        slugPageDataImage,
+        slugCmsContentData,
+        mdContent,
     };
 };
 
