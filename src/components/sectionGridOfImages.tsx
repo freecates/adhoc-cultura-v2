@@ -51,7 +51,7 @@ const ImageInGrid: React.FC<DataObject> = ({ name, logo }): JSX.Element => (
 
 const renderImage = ({ name, logo, route }: DataObject): JSX.Element =>
     route ? (
-        <Link key={name} href={route}>
+        <Link key={name} href={route} title={name}>
             <ImageInGrid key={name} name={name} logo={logo} />
         </Link>
     ) : (

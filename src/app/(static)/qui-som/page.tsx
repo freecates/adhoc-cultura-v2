@@ -19,7 +19,7 @@ type QuiSomProps = {
     };
 };
 
-export default async function QuiSom() {
+export default async function QuiSom(): Promise<JSX.Element> {
     const { team, partner, collaborator, title, description } = await getPageData('equip');
 
     const gridData = (type: { title: string; photo: string; slug: string; type: string }[]): { name: string; logo: string; route?: string }[] =>

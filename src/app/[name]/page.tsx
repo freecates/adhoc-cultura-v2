@@ -26,8 +26,7 @@ type NameProps = {
 };
 
 export default async function Name({ params }: { params: { name: string } }): Promise<JSX.Element> {
-    const { pageData }: NameProps = await getData(params.name);
-    const { title, description, image, icon, data } = pageData;
+    const { title, description, image, icon, data } = await getPageData(params.name);
     return (
         <main className='flex-1'>
             <SectionGridOfCards
@@ -42,10 +41,7 @@ export default async function Name({ params }: { params: { name: string } }): Pr
 }
 
 export const generateMetadata = async ({ params }: { params: { name: string } }): Promise<Metadata> => {
-    const [meta] = await Promise.all([api.adhocCulturaData.getData('json', params?.name)]);
-    const { title, description, data } = meta;
-    const titlesFromArray = data.map(({ title }: { title: string }): string => title);
-    const titles = [...new Set<string>(titlesFromArray)];
+    const { title, description, titles } = await getPageData(params.name);
     return {
         title,
         description: description + ' | ' + titles?.join(', '),
@@ -55,10 +51,26 @@ export const generateMetadata = async ({ params }: { params: { name: string } })
     };
 };
 
-const getData = async (params: string): Promise<any> => {
-    const [pageData] = await Promise.all([api.adhocCulturaData.getData('json', params)]);
+const getData = async (fileName: string): Promise<any> => {
+    const [pageData] = await Promise.all([api.adhocCulturaData.getData('json', fileName)]);
     return {
         pageData,
+    };
+};
+
+const getPageData = async (fileName: string) => {
+    const { pageData }: NameProps = await getData(fileName);
+    const { title, description, image, icon, data } = pageData;
+    const titlesFromArray = data.map(({ title }: { title: string }): string => title);
+    const titles = [...new Set<string>(titlesFromArray)];
+
+    return {
+        title,
+        description,
+        image,
+        icon,
+        data,
+        titles,
     };
 };
 

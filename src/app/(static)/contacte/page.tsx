@@ -16,8 +16,7 @@ type Contact = {
 };
 
 export default async function Contacte(): Promise<JSX.Element> {
-    const { name, lat, lng, address, code, city, tel, mail }: Contact = await getData();
-    const latLng = { lat: Number(lat), lng: Number(lng) };
+    const { name, latLng, address, code, city, tel, mail } = await getPageData('contact');
     return (
         <main className='flex-1'>
             <SectionPageHeader title={'Contacte'} name={'Vinens a veure ;-)'} slug='contacte' />
@@ -39,8 +38,7 @@ export default async function Contacte(): Promise<JSX.Element> {
 }
 
 export const generateMetadata = async (): Promise<Metadata> => {
-    const [contact] = await Promise.all([api.adhocCulturaData.getData('json', 'contact')]);
-    const { name, address, code, city } = contact[0];
+    const { name, address, code, city } = await getPageData('contact');
 
     return {
         title: name,
@@ -51,7 +49,21 @@ export const generateMetadata = async (): Promise<Metadata> => {
     };
 };
 
-const getData = async (): Promise<any> => {
-    const [contact] = await Promise.all([api.adhocCulturaData.getData('json', 'contact')]);
+const getData = async (fileName: string): Promise<any> => {
+    const [contact] = await Promise.all([api.adhocCulturaData.getData('json', fileName)]);
     return contact[0];
+};
+
+const getPageData = async (fileName: string): Promise<any> => {
+    const { name, lat, lng, address, code, city, tel, mail }: Contact = await getData(fileName);
+    const latLng = { lat: Number(lat), lng: Number(lng) };
+    return {
+        name,
+        latLng,
+        address,
+        code,
+        city,
+        tel,
+        mail,
+    };
 };
