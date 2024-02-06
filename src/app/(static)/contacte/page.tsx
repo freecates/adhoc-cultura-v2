@@ -13,13 +13,14 @@ type Contact = {
     city: string;
     tel: string;
     mail: string;
+    url: string;
 };
 
 export default async function Contacte(): Promise<JSX.Element> {
-    const { name, latLng, address, code, city, tel, mail } = await getPageData('contact');
+    const { name, latLng, address, code, city, tel, mail, url } = await getPageData('contact');
     return (
         <main className='flex-1'>
-            <SectionPageHeader title={'Contacte'} name={'Vinens a veure ;-)'} slug='contacte' />
+            <SectionPageHeader title={'Contacte'} name={'Vine\'ns a veure ;-)'} slug='contacte' />
             <section className='w-full pt-6 md:pt-12 lg:pt-16 border-b'>
                 <div className='mx-auto max-w-[1034px] h-[574px] md:h-[640px] text-gray-600 overflow-hidden rounded-t-xl object-cover transition-all duration-500 ease-in-out'>
                     <GoogleMap
@@ -30,6 +31,7 @@ export default async function Contacte(): Promise<JSX.Element> {
                         tel={tel}
                         mail={mail}
                         name={name}
+                        url={url}
                     />
                 </div>
             </section>
@@ -55,7 +57,7 @@ const getData = async (fileName: string): Promise<any> => {
 };
 
 const getPageData = async (fileName: string): Promise<any> => {
-    const { name, lat, lng, address, code, city, tel, mail }: Contact = await getData(fileName);
+    const { name, lat, lng, address, code, city, tel, mail, url }: Contact = await getData(fileName);
     const latLng = { lat: Number(lat), lng: Number(lng) };
     return {
         name,
@@ -65,5 +67,6 @@ const getPageData = async (fileName: string): Promise<any> => {
         city,
         tel,
         mail,
+        url,
     };
 };

@@ -10,6 +10,7 @@ export const MarkerWithInfowindow = ({
     tel,
     mail,
     code,
+    url,
 }: {
     lat: number;
     lng: number;
@@ -19,6 +20,7 @@ export const MarkerWithInfowindow = ({
     tel: string;
     mail: string;
     code: string;
+    url: string;
 }) => {
     const [infowindowOpen, setInfowindowOpen] = React.useState(true);
     const [markerRef, marker] = useAdvancedMarkerRef();
@@ -42,7 +44,8 @@ export const MarkerWithInfowindow = ({
                         {address} <br />
                         {code} {city} <br />
                         <a href={'tel:' + tel}>{tel}</a> <br />{' '}
-                        <a className='text-blue-500 hover:underline' href={'mailto:' + mail}>{mail}</a>
+                        <a className='text-blue-500 hover:underline' href={'mailto:' + mail}>{mail}</a><br/>
+                        <a href={url}>Com arribar-hi?</a>
                     </p>
                 </InfoWindow>
             )}

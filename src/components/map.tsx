@@ -12,6 +12,7 @@ const GoogleMap = ({
     city,
     tel,
     mail,
+    url,
 }: {
     latLng: { lat: number; lng: number };
     name: string;
@@ -20,6 +21,7 @@ const GoogleMap = ({
     city: string;
     tel: string;
     mail: string;
+    url: string;
 }) => {
     const { lat, lng } = latLng;
     return (
@@ -40,6 +42,7 @@ const GoogleMap = ({
                     city={city}
                     tel={tel}
                     mail={mail}
+                    url={url}
                 />
             </Map>
         </APIProvider>
