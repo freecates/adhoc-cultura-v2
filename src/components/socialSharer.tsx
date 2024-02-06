@@ -6,10 +6,10 @@ import {
     FacebookShareButton,
     LinkedinIcon,
     LinkedinShareButton,
-    XIcon,
     TwitterShareButton,
     WhatsappIcon,
     WhatsappShareButton,
+    XIcon,
 } from 'react-share';
 
 type SocialShareProps = {

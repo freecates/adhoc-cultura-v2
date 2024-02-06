@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import dynamicIconImports from 'lucide-react/dynamicIconImports';
-import api from '@/lib/api';
 import SectionGridOfCards from '@/components/sectionGridOfCards';
+import api from '@/lib/api';
+import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import { Metadata } from 'next';
 
 type Data = {

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Icon from './ui/icon';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import { dateToLocale, shuffleArray } from '@/lib/utils';
-import { CardHeader, CardContent, Card } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from './ui/button';
 
 type DataObject = {

@@ -7,13 +7,10 @@ type Quote = {
     bg: string;
     color: string;
     id: string;
-}
-type Adhoc = {
-    adhoc: Quote[];
-}
+};
 
 export default async function Adhoc(): Promise<JSX.Element> {
-    const { adhoc }: Adhoc = await getData();
+    const { adhoc }: { adhoc: Quote[] } = await getData();
     return (
         <main className='flex-1'>
             <QuotesPage data={adhoc} />

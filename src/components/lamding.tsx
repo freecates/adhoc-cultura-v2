@@ -1,7 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
 import { Button } from "@/components/ui/button"
-import { CardContent, Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import api from "@/lib/api"
 import { shimmer, toBase64 } from "@/lib/utils"
