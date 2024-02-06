@@ -1,12 +1,12 @@
 import api from "@/lib/api";
-import MdPAge from "@/components/mdPage";
+import MdPage from "@/components/mdPage";
 import { Metadata } from "next";
 
 export default async function PoliticaDeCookies(): Promise<JSX.Element> {
     const { mdPoliticaDeCookies }: { mdPoliticaDeCookies: string } = await getData();
     return (
         <main className='flex-1'>
-            <MdPAge title='Politica de Cookies' mdContent={mdPoliticaDeCookies} />
+            <MdPage title='Politica de Cookies' mdContent={mdPoliticaDeCookies} />
         </main>
     );
 }

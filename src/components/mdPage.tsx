@@ -4,7 +4,7 @@ type MdPage = {
     title: string;
     mdContent: string;
 };
-const MdPAge: React.FC<MdPage> = ({ title, mdContent }) => {
+const MdPage: React.FC<MdPage> = ({ title, mdContent }) => {
     return (
         <>
             <section className='w-full pt-12 md:pt-24 lg:pt-32 border-b'>
@@ -34,4 +34,4 @@ const MdPAge: React.FC<MdPage> = ({ title, mdContent }) => {
     );
 };
 
-export default MdPAge;
+export default MdPage;

@@ -1,12 +1,12 @@
 import api from "@/lib/api";
-import MdPAge from "@/components/mdPage";
+import MdPage from "@/components/mdPage";
 import { Metadata } from 'next';
 
 export default async function AvisLegal(): Promise<JSX.Element> {
     const { mdAvisLegal }: { mdAvisLegal: string } = await getData();
     return (            
         <main className="flex-1">
-            <MdPAge title="Avís Legal" mdContent={mdAvisLegal} />
+            <MdPage title="Avís Legal" mdContent={mdAvisLegal} />
         </main>
     )
 }
