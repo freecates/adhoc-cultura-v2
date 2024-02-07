@@ -63,6 +63,7 @@ export default async function Footer(): Promise<JSX.Element> {
                                 className='text-xs font-medium hover:underline underline-offset-4'
                                 href={r.url}
                                 target='_blank'
+                                title={r.name}
                             >
                                 {r.icon && <Icon name={r.icon.name} color={r.icon.color} size={r.icon.size} />}
                             </a>

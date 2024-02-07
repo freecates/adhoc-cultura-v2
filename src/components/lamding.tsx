@@ -66,6 +66,7 @@ export async function Landing(): Promise<JSX.Element> {
                       src='/bg-adhoc-cultura-1024.jpg'
                       width='1034'
                       placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(1034, 574))}`}
+                      priority={true}
                   />
               </div>
           </section>
