@@ -1,8 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 import SectionGridOfCards from '@/components/sectionGridOfCards';
 import api from '@/lib/api';
+import { shimmer, toBase64 } from '@/lib/utils';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import { Metadata } from 'next';
+import Image from 'next/image';
 
 type Data = {
     title: string;
@@ -36,6 +38,22 @@ export default async function Name({ params }: { params: { name: string } }): Pr
                 image={image && image}
                 icon={icon && icon}
             />
+            {image && (
+                <section className={`bg-black text-white w-full py-12`}>
+                    <div className='mx-auto text-center'>
+                        <Image
+                            className='mx-auto aspect-[16/9] overflow-hidden object-cover transition-all duration-500 ease-in-out'
+                            alt={image.alt}
+                            src={image.src}
+                            height={933}
+                            width={1680}
+                            placeholder={`data:image/svg+xml;base64,${toBase64(
+                                shimmer(1680, 933),
+                            )}`}
+                        />
+                    </div>
+                </section>
+            )}
         </main>
     );
 }
