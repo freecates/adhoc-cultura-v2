@@ -47,6 +47,9 @@ body {
   h2 {
     @apply mt-8 text-3xl font-bold;
   }
+  h3 {
+    @apply mt-6 text-2xl font-bold;
+  }
   p {
     @apply mt-4;
   }
