@@ -103,6 +103,7 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                                                 alt={d.name}
                                                 width={192}
                                                 height={192}
+                                                className='mx-auto'
                                             />
                                         )}
                                     </CardHeader>
