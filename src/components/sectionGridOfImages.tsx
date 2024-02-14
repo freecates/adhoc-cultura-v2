@@ -19,6 +19,8 @@ type DataObject = {
     name: string;
     logo: string;
     route?: string;
+    width?: number;
+    height?: number;
 };
 
 type Grid = {
@@ -26,6 +28,8 @@ type Grid = {
     maxItems?: number;
     isShuffled?: boolean;
     cols?: number;
+    width?: number;
+    height?: number;
 };
 
 interface ISectionProps extends Grid {
@@ -35,30 +39,32 @@ interface ISectionProps extends Grid {
     buttonLink?: string;
 }
 
-const ImageInGrid: React.FC<DataObject> = ({ name, logo }): JSX.Element => (
+const ImageInGrid: React.FC<DataObject> = ({ name, logo, width, height }): JSX.Element => {
+    const aspectVideo = width ? '' : 'aspect-video'; 
+    return (
     <div className='w-full p-4'>
         <Image
             key={name}
             alt={name}
-            className='mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full transition-all duration-500 ease-in-out'
-            height='300'
+            className={`mx-auto ${aspectVideo} overflow-hidden rounded-xl object-cover object-center sm:w-full transition-all duration-500 ease-in-out`}
+            height={`${height ? height : '300'}`}
             src={logo}
-            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(550, 300))}`}
-            width='550'
+            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(width || 550, height || 300))}`}
+            width={`${width ? width : '300'}`}
         />
     </div>
-);
+)};
 
-const renderImage = ({ name, logo, route }: DataObject): JSX.Element =>
+const renderImage = ({ name, logo, route }: DataObject, width?: number, height?: number): JSX.Element =>
     route ? (
         <Link key={name} href={route} title={name}>
-            <ImageInGrid key={name} name={name} logo={logo} />
+            <ImageInGrid key={name} name={name} logo={logo} width={width} height={height} />
         </Link>
     ) : (
-        <ImageInGrid key={name} name={name} logo={logo} />
+        <ImageInGrid key={name} name={name} logo={logo} width={width} height={height} />
     );
 
-const GridOfImages: React.FC<Grid> = ({ data, isShuffled, maxItems, cols }) => {
+const GridOfImages: React.FC<Grid> = ({ data, isShuffled, maxItems, cols, width, height }) => {
     let array = [];
     if (isShuffled) {
         array = maxItems ? shuffleArray(data).slice(0, maxItems) : shuffleArray(data);
@@ -71,11 +77,11 @@ const GridOfImages: React.FC<Grid> = ({ data, isShuffled, maxItems, cols }) => {
         <div
             className={`mx-auto grid max-w-5xl xl:max-w-7xl items-center gap-6 py-12 lg:grid-cols-2 ${maxCols} lg:gap-12`}
         >
-            {array.map((d): JSX.Element => renderImage(d))}
+            {array.map((d): JSX.Element => renderImage(d, width, height))}
         </div>
     );}
 
-const SectionGripOfImages: React.FC<ISectionProps> = ({ title, description, data, maxItems, isShuffled, buttonText, buttonLink, cols }) => {
+const SectionGripOfImages: React.FC<ISectionProps> = ({ title, description, data, maxItems, isShuffled, buttonText, buttonLink, cols, width, height }) => {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 md:px-6">
@@ -87,7 +93,7 @@ const SectionGripOfImages: React.FC<ISectionProps> = ({ title, description, data
                     </p>
                 }
             </div>
-            <GridOfImages data={data} maxItems={maxItems} isShuffled={isShuffled} cols={cols} />
+            <GridOfImages data={data} maxItems={maxItems} isShuffled={isShuffled} cols={cols} width={width} height={height} />
             {buttonText &&
                 <div className="flex justify-center">
                     {buttonLink ? <Button asChild><Link href={buttonLink}>{buttonText}</Link></Button>: <Button>{buttonText}</Button>}

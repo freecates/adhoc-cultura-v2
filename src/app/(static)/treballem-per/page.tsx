@@ -16,7 +16,7 @@ export default async function TreballemPer() {
     const { clients } = await getPageData('clients');
     return (
         <main className='flex-1'>
-            <SectionGripOfImages title={'Treballem per'} data={clients} />
+            <SectionGripOfImages title={'Treballem per'} data={clients} width={400} height={400} />
             <TestimonialsSection />
         </main>
     );
