@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description:
         'Els drets de propietat intel·lectual dels serveis on-line de ADHOC CULTURA i del seu contingut pertanyen a aquesta societat o, si escau, a terceres persones.',
     alternates: {
-        canonical: 'https://adhoc-cultura.com/avis-legal',
+        canonical: 'https://www.adhoc-cultura.com/avis-legal',
     },
 };
 

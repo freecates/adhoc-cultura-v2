@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description:
         'La cultura com a motor econòmic i social. Treballem perquè totes les persones puguin gaudir dels beneficis de la cultura',
     alternates: {
-        canonical: 'https://adhoc-cultura.com/',
+        canonical: 'https://www.adhoc-cultura.com/',
     },
     icons: {
         icon: '/favicon.ico',

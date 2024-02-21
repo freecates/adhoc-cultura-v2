@@ -46,7 +46,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
         title: name,
         description: `${address}, ${code} ${city}`,
         alternates: {
-            canonical: 'https://adhoc-cultura.com/contacte',
+            canonical: 'https://www.adhoc-cultura.com/contacte',
         },
     };
 };

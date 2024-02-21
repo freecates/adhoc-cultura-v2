@@ -135,11 +135,11 @@ export const generateMetadata = async ({
         slug,
     });
     return {
-        metadataBase: new URL(`https://adhoc-cultura.com/${name}/${slug}`),
+        metadataBase: new URL(`https://www.adhoc-cultura.com/${name}/${slug}`),
         title: slugPageData?.title || slugCmsContentData?.title?.rendered || '',
         description: slugPageData?.name || slugCmsContentData?.acf?.destacat || '',
         alternates: {
-            canonical: `https://adhoc-cultura.com/${name}/${slug}`,
+            canonical: `https://www.adhoc-cultura.com/${name}/${slug}`,
         },
         openGraph: {
             title: slugPageData?.title || slugCmsContentData?.title?.rendered || '',
@@ -149,7 +149,7 @@ export const generateMetadata = async ({
                 {
                     url:
                         slugPageDataImage ||
-                        'https://www.adhoc-cultura.com/https://www.adhoc-cultura.com/bg-adhoc-cultura-1024.jpg',
+                        'https://www.adhoc-cultura.com/bg-adhoc-cultura-1024.jpg',
                     width: 1024,
                     height: 1024,
                 },

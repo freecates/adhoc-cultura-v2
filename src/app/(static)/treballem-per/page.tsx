@@ -28,7 +28,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
         title: 'Treballem per',
         description: clients.map(({ name }: { name: string }): string => name).join(', '),
         alternates: {
-            canonical: 'https://adhoc-cultura.com/treballem-per',
+            canonical: 'https://www.adhoc-cultura.com/treballem-per',
         },
     };
 };

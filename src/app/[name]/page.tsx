@@ -46,7 +46,7 @@ export const generateMetadata = async ({ params }: { params: { name: string } })
         title,
         description: description + ' | ' + titles?.join(', '),
         alternates: {
-            canonical: `https://adhoc-cultura.com/${params.name}`,
+            canonical: `https://www.adhoc-cultura.com/${params.name}`,
         },
     };
 };

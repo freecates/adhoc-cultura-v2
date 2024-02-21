@@ -69,7 +69,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
             ' | ' +
             data.map(({ title }: { title: string }): string => title).join(', '),
         alternates: {
-            canonical: 'https://adhoc-cultura.com/qui-som',
+            canonical: 'https://www.adhoc-cultura.com/qui-som',
         },
     };
 };
