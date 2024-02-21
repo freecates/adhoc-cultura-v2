@@ -130,12 +130,31 @@ export const generateMetadata = async ({
     params: { name: string; slug: string };
 }): Promise<Metadata> => {
     const { name, slug } = params;
-    const { slugPageData, slugCmsContentData } = await getPageData({ name, slug });
+    const { slugPageData, slugCmsContentData, slugPageDataImage } = await getPageData({
+        name,
+        slug,
+    });
     return {
+        metadataBase: new URL(`https://adhoc-cultura.com/${name}/${slug}`),
         title: slugPageData?.title || slugCmsContentData?.title?.rendered || '',
         description: slugPageData?.name || slugCmsContentData?.acf?.destacat || '',
         alternates: {
             canonical: `https://adhoc-cultura.com/${name}/${slug}`,
+        },
+        openGraph: {
+            title: slugPageData?.title || slugCmsContentData?.title?.rendered || '',
+            description: `${slugPageData?.name || slugCmsContentData?.acf?.destacat || ''}...`,
+            url: `/${name}/${slug}`,
+            images: [
+                {
+                    url:
+                        slugPageDataImage ||
+                        'https://www.adhoc-cultura.com/https://www.adhoc-cultura.com/bg-adhoc-cultura-1024.jpg',
+                    width: 1024,
+                    height: 1024,
+                },
+            ],
+            type: 'article',
         },
     };
 };
