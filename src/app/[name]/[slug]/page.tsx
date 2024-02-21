@@ -135,7 +135,7 @@ export const generateMetadata = async ({
         slug,
     });
     return {
-        metadataBase: new URL(`https://www.adhoc-cultura.com/${name}/${slug}`),
+        metadataBase: new URL(`https://www.adhoc-cultura.com`),
         title: slugPageData?.title || slugCmsContentData?.title?.rendered || '',
         description: slugPageData?.name || slugCmsContentData?.acf?.destacat || '',
         alternates: {
