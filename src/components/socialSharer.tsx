@@ -23,7 +23,7 @@ const SocialSharer: React.FC<SocialShareProps> = ({ type, slug, title }) => {
         <div className={`socialShareComponent`}>
             <div className={'PostSomeNetwork'}>
                 <FacebookShareButton
-                    url={`https://www.adhoc-cultura.com/${type}/${slug}`}
+                    url={`https://www.adhoc-cultura.cat/${type}/${slug}`}
                     title={title}
                     hashtag={'#CulturaPerATothom'}
                     className='Post__some-network__share-button'
@@ -34,7 +34,7 @@ const SocialSharer: React.FC<SocialShareProps> = ({ type, slug, title }) => {
 
             <div className={'PostSomeNetwork'}>
                 <TwitterShareButton
-                    url={`https://www.adhoc-cultura.com/${type}/${slug}`}
+                    url={`https://www.adhoc-cultura.cat/${type}/${slug}`}
                     title={title}
                     hashtags={['CulturaPerATothom']}
                     via='adhoccultura'
@@ -46,7 +46,7 @@ const SocialSharer: React.FC<SocialShareProps> = ({ type, slug, title }) => {
 
             <div className={'PostSomeNetwork'}>
                 <LinkedinShareButton
-                    url={`https://www.adhoc-cultura.com/${type}/${slug}`}
+                    url={`https://www.adhoc-cultura.cat/${type}/${slug}`}
                     title={title}
                     className='Post__some-network__share-button'
                 >
@@ -56,7 +56,7 @@ const SocialSharer: React.FC<SocialShareProps> = ({ type, slug, title }) => {
 
             <div className={'PostSomeNetwork'}>
                 <WhatsappShareButton
-                    url={`https://www.adhoc-cultura.com/${type}/${slug}`}
+                    url={`https://www.adhoc-cultura.cat/${type}/${slug}`}
                     title={title}
                     className='Post__some-network__share-button'
                 >
@@ -66,7 +66,7 @@ const SocialSharer: React.FC<SocialShareProps> = ({ type, slug, title }) => {
 
             <div className={'PostSomeNetwork'}>
                 <EmailShareButton
-                    url={`https://www.adhoc-cultura.com/${type}/${slug}`}
+                    url={`https://www.adhoc-cultura.cat/${type}/${slug}`}
                     subject={title}
                     body={`Fes-li un cop d'ull a: "${title}"`}
                     className='Post__some-network__share-button'

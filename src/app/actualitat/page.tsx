@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: actualitat.title,
     description: actualitat.description,
     alternates: {
-        canonical: 'https://www.adhoc-cultura.com/actualitat',
+        canonical: 'https://www.adhoc-cultura.cat/actualitat',
     },
 };
 

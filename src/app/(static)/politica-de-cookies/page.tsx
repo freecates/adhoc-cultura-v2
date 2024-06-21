@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description:
         'Les cookies són breus informacions que s\'envien i s\'emmagatzemen en el disc dur de l\'ordinador de l\'usuari a través del seu navegador quan aquest es connecta a una web',
     alternates: {
-        canonical: 'https://www.adhoc-cultura.com/politica-de-cookies',
+        canonical: 'https://www.adhoc-cultura.cat/politica-de-cookies',
     },
 };
 

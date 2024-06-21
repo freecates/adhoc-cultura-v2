@@ -5,7 +5,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'www.adhoc-cultura.com',
+                hostname: 'www.adhoc-cultura.cat',
             },
             {
                 protocol: 'https',

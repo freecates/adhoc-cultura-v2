@@ -41,7 +41,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
         title,
         description: name,
         alternates: {
-            canonical: 'https://www.adhoc-cultura.com/el-nostre-metode',
+            canonical: 'https://www.adhoc-cultura.cat/el-nostre-metode',
         },
     };
 };
