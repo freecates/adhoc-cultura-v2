@@ -47,7 +47,7 @@ export default async function Servei({ params }: { params: { name: string; slug:
     const { name, slug } = params;
     const { data, image, icon, slugPageData, slugPageDataImage, slugCmsContentData, mdContent } =
         await getPageData({ name, slug });
-    const isTeam = !!(fileName(name) === 'equip');
+    // const isTeam = !!(fileName(name) === 'equip');
 
     return (
         <Animate>
@@ -62,8 +62,8 @@ export default async function Servei({ params }: { params: { name: string; slug:
                     slug={slug}
                     cmsType={slugCmsContentData?.type}
                     pageType={slugPageData?.type}
-                    isTeam={isTeam}
-                    withBorder={!isTeam}
+                    isTeam={false}
+                    withBorder={true}
                 />
                 {slugPageData?.description && (
                     <>
