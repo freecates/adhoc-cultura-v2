@@ -2,6 +2,20 @@ import { dateToLocale, shimmer, toBase64 } from '@/lib/utils';
 import Image from 'next/image';
 import SocialSharer from './socialSharer';
 
+const renderImageTeam = (img: string, name: string) => (
+    <span className='bgTeam'>
+        <Image
+            alt={name}
+            className='mx-auto aspect-[1/1] overflow-hidden rounded-full object-cover transition-all duration-500 ease-in-out'
+            height='574'
+            src={img}
+            width='574'
+            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(574, 574))}`}
+        />
+    </span>
+);
+
+
 const SectionPageHeader: React.FC<{
     title?: string;
     trustedHTMLtitle?: TrustedHTML;
@@ -13,7 +27,20 @@ const SectionPageHeader: React.FC<{
     cmsType?: string;
     pageType?: string;
     withBorder?: boolean;
-}> = ({ title, trustedHTMLtitle, name, img, date, destacat, slug, cmsType, pageType, withBorder }) => {
+    isTeam?: boolean;
+}> = ({
+    title,
+    trustedHTMLtitle,
+    name,
+    img,
+    date,
+    destacat,
+    slug,
+    cmsType,
+    pageType,
+    withBorder,
+    isTeam,
+}) => {
     const border = withBorder ? 'border-b' : '';
     return (
         <section className={`w-full pt-12 md:pt-24 lg:pt-32 ${border}`}>
@@ -54,16 +81,22 @@ const SectionPageHeader: React.FC<{
                         )}
                     </div>
                 </div>
-                {img && name && (
-                    <Image
-                        alt={name}
-                        className='mx-auto aspect-[16/9] overflow-hidden rounded-t-xl object-cover transition-all duration-500 ease-in-out'
-                        height='574'
-                        src={img}
-                        width='1034'
-                        placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(1034, 574))}`}
-                    />
-                )}
+                {img &&
+                    name &&
+                    (isTeam ? (
+                        renderImageTeam(img, name)
+                    ) : (
+                        <Image
+                            alt={name}
+                            className='mx-auto aspect-[16/9] overflow-hidden rounded-t-xl object-cover transition-all duration-500 ease-in-out'
+                            height='574'
+                            src={img}
+                            width='1034'
+                            placeholder={`data:image/svg+xml;base64,${toBase64(
+                                shimmer(1034, 574),
+                            )}`}
+                        />
+                    ))}
             </div>
         </section>
     );
