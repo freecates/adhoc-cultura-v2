@@ -4,6 +4,8 @@ import api from '@/lib/api';
 import { Button } from './ui/button';
 import Icon from './ui/icon';
 
+import type { JSX } from "react";
+
 type Route = {
   name: string;
   url: string;

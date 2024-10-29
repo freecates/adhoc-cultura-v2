@@ -43,7 +43,8 @@ type PageDataProps = {
 const fileName = (name: string): string =>
     name === 'team' || name === 'partner' || name === 'collaborator' ? 'equip' : name;
 
-export default async function Servei({ params }: { params: { name: string; slug: string } }) {
+export default async function Servei(props: { params: Promise<{ name: string; slug: string }> }) {
+    const params = await props.params;
     const { name, slug } = params;
     const { data, image, icon, slugPageData, slugPageDataImage, slugCmsContentData, mdContent } =
         await getPageData({ name, slug });
@@ -126,11 +127,12 @@ export default async function Servei({ params }: { params: { name: string; slug:
     );
 }
 
-export const generateMetadata = async ({
-    params,
-}: {
-    params: { name: string; slug: string };
-}): Promise<Metadata> => {
+export const generateMetadata = async (
+    props: {
+        params: Promise<{ name: string; slug: string }>;
+    }
+): Promise<Metadata> => {
+    const params = await props.params;
     const { name, slug } = params;
     const { slugPageData, slugCmsContentData, slugPageDataImage } = await getPageData({
         name,

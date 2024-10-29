@@ -3,6 +3,8 @@ import MdFileContent from "@/components/mdFileContent";
 import api from '@/lib/api';
 import SectionPageHeader from "@/components/sectionPageHeader";
 
+import type { JSX } from "react";
+
 type Metode = {
     metode: {
         title: string;

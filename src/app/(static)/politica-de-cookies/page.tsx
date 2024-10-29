@@ -2,6 +2,8 @@ import api from "@/lib/api";
 import MdPage from "@/components/mdPage";
 import { Metadata } from "next";
 
+import type { JSX } from "react";
+
 export default async function PoliticaDeCookies(): Promise<JSX.Element> {
     const { mdPoliticaDeCookies }: { mdPoliticaDeCookies: string } = await getData();
     return (

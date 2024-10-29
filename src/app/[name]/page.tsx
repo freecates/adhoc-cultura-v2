@@ -4,6 +4,8 @@ import api from '@/lib/api';
 import dynamicIconImports from 'lucide-react/dynamicIconImports';
 import { Metadata } from 'next';
 
+import type { JSX } from "react";
+
 type Data = {
     title: string;
     name: string;
@@ -25,7 +27,8 @@ type NameProps = {
     };
 };
 
-export default async function Name({ params }: { params: { name: string } }): Promise<JSX.Element> {
+export default async function Name(props: { params: Promise<{ name: string }> }): Promise<JSX.Element> {
+    const params = await props.params;
     const { title, description, image, icon, data } = await getPageData(params.name);
     return (
         <main className='flex-1'>
@@ -40,7 +43,8 @@ export default async function Name({ params }: { params: { name: string } }): Pr
     );
 }
 
-export const generateMetadata = async ({ params }: { params: { name: string } }): Promise<Metadata> => {
+export const generateMetadata = async (props: { params: Promise<{ name: string }> }): Promise<Metadata> => {
+    const params = await props.params;
     const { title, description, titles } = await getPageData(params.name);
     return {
         title,

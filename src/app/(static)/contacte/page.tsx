@@ -4,6 +4,8 @@ import SectionPageHeader from '@/components/sectionPageHeader';
 import api from '@/lib/api';
 import { Metadata } from 'next';
 
+import type { JSX } from "react";
+
 type Contact = {
     name: string;
     lat: string;
