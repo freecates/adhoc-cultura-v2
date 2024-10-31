@@ -3,6 +3,8 @@ import api from '@/lib/api';
 import { Badge } from './ui/badge';
 import { Card, CardContent } from './ui/card';
 
+import type { JSX } from "react";
+
 type Data = {
     quote: string;
     name: string;

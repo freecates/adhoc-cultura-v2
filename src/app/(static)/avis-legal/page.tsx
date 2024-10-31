@@ -2,6 +2,8 @@ import api from "@/lib/api";
 import MdPage from "@/components/mdPage";
 import { Metadata } from 'next';
 
+import type { JSX } from "react";
+
 export default async function AvisLegal(): Promise<JSX.Element> {
     const { mdAvisLegal }: { mdAvisLegal: string } = await getData();
     return (            

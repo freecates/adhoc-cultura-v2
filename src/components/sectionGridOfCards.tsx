@@ -6,6 +6,8 @@ import { dateToLocale, shuffleArray } from '@/lib/utils';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from './ui/button';
 
+import type { JSX } from "react";
+
 type DataObject = {
     title:
         | string

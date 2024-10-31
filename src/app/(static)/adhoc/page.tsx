@@ -3,6 +3,7 @@ import QuotesPage from "@/components/quotesPage";
 import api from "@/lib/api";
 import { shimmer, toBase64 } from "@/lib/utils";
 import Image from "next/image";
+import type { JSX } from "react";
 type Quote = {
     quote: string;
     author: string;

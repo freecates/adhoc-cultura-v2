@@ -5,6 +5,8 @@ import api from "@/lib/api";
 import Icon from "./ui/icon";
 import AraCulturaButton from './araCulturaButon';
 
+import type { JSX } from "react";
+
 type Route = {
   name: string;
   url: string;

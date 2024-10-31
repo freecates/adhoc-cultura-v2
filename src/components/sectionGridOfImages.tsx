@@ -4,6 +4,8 @@ import { Button } from "./ui/button";
 import { shimmer, shuffleArray, toBase64 } from "@/lib/utils";
 import Link from "next/link";
 
+import type { JSX } from "react";
+
 const xlGridCols = (number: number): string => {
     switch (number) {
         case 3:

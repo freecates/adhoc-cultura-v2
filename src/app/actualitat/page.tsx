@@ -3,6 +3,8 @@ import api from '@/lib/api';
 import SectionGridOfCards from '@/components/sectionGridOfCards';
 import { Metadata } from 'next';
 
+import type { JSX } from "react";
+
 type Data = {
     title: {
         rendered: string;

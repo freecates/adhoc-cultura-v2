@@ -9,6 +9,8 @@ import dynamicIconImports from "lucide-react/dynamicIconImports"
 import Link from 'next/link';
 import TestimonialsSection from "./testimonials"
 
+import type { JSX } from "react";
+
 type Data = {
   title: string;
   name: string;

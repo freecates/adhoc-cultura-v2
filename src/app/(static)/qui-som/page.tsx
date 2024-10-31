@@ -6,6 +6,8 @@ import api from '@/lib/api';
 import Image from 'next/image';
 import { shimmer, toBase64 } from '@/lib/utils';
 
+import type { JSX } from "react";
+
 type Data = {
     title: string;
     photo: string;
