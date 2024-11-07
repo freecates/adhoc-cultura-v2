@@ -39,7 +39,9 @@ export default async function Footer(): Promise<JSX.Element> {
                     </div>
                     <div className='flex space-x-4 lg:justify-end'>
                         <Button asChild={true}>
-                            <Link href='/contacte'>Envieu missatge</Link>
+                            <Link prefetch={true} href='/contacte'>
+                                Envieu missatge
+                            </Link>
                         </Button>
                     </div>
                 </div>
@@ -50,6 +52,7 @@ export default async function Footer(): Promise<JSX.Element> {
                     {textRoutes.map(
                         (r, index): JSX.Element => (
                             <Link
+                                prefetch={true}
                                 key={index + r.name}
                                 className='text-xs font-medium hover:underline underline-offset-4'
                                 href={r.url}
@@ -67,7 +70,13 @@ export default async function Footer(): Promise<JSX.Element> {
                                 target='_blank'
                                 title={r.name}
                             >
-                                {r.icon && <Icon name={r.icon.name} color={r.icon.color} size={r.icon.size} />}
+                                {r.icon && (
+                                    <Icon
+                                        name={r.icon.name}
+                                        color={r.icon.color}
+                                        size={r.icon.size}
+                                    />
+                                )}
                             </a>
                         ),
                     )}

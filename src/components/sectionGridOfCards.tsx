@@ -69,7 +69,10 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                             d.type === 'collaborator' ||
                             d.type === 'partners') &&
                             (d.slug ? (
-                                <Link href={`/${d.type ? `${d.type}/` : ''}${d.slug}`}>
+                                <Link
+                                    prefetch={true}
+                                    href={`/${d.type ? `${d.type}/` : ''}${d.slug}`}
+                                >
                                     <CardHeader>
                                         {d.type === 'serveis' && image && (
                                             <Image
@@ -120,7 +123,7 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
                                 </>
                             ))}
                         {d.type === 'post' && (
-                            <Link href={`/${d.type ? `${d.type}/` : ''}${d.slug}`}>
+                            <Link prefetch={true} href={`/${d.type ? `${d.type}/` : ''}${d.slug}`}>
                                 <CardHeader>
                                     {d.type === 'post' ? (
                                         <>
@@ -189,7 +192,9 @@ const SectionGridOfCards: React.FC<ISectionProps> = ({
                     <div className='flex justify-center'>
                         {buttonLink ? (
                             <Button asChild>
-                                <Link href={buttonLink}>{buttonText}</Link>
+                                <Link prefetch={true} href={buttonLink}>
+                                    {buttonText}
+                                </Link>
                             </Button>
                         ) : (
                             <Button>{buttonText}</Button>
