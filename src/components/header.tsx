@@ -27,7 +27,7 @@ export default async function Header(): Promise<JSX.Element> {
     return (
         <header className='px-4 lg:px-6 py-2 md:h-20 flex flex-col md:flex-row items-center border-b'>
             <div className='flex items-center justify-center mr-1'>
-                <Link href='/'>
+                <Link prefetch={true} href='/'>
                     <Image
                         width={80}
                         height={44}
@@ -42,6 +42,7 @@ export default async function Header(): Promise<JSX.Element> {
                 {textRoutes.map(
                     (r, index): JSX.Element => (
                         <Link
+                            prefetch={true}
                             key={index + r.name}
                             className='shrink-0 text-xs font-medium hover:underline underline-offset-4'
                             href={r.url}
@@ -51,7 +52,7 @@ export default async function Header(): Promise<JSX.Element> {
                     ),
                 )}
                 {iconRoutes && iconRoutes.icon && (
-                    <Link title={iconRoutes.name} href={iconRoutes.url}>
+                    <Link prefetch={true} title={iconRoutes.name} href={iconRoutes.url}>
                         <Icon
                             name={iconRoutes.icon.name}
                             color={iconRoutes.icon?.color}

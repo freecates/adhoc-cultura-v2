@@ -57,7 +57,9 @@ export async function Landing(): Promise<JSX.Element> {
                       </div>
                       <div className='flex flex-col items-start space-y-4'>
                           <Button asChild>
-                              <Link href={'/adhoc'}>Comencem</Link>
+                              <Link prefetch={true} href={'/adhoc'}>
+                                  Comencem
+                              </Link>
                           </Button>
                       </div>
                   </div>

@@ -23,6 +23,7 @@ type DataObject = {
     route?: string;
     width?: number;
     height?: number;
+    imageCount?: number;
 };
 
 type Grid = {
@@ -41,32 +42,62 @@ interface ISectionProps extends Grid {
     buttonLink?: string;
 }
 
-const ImageInGrid: React.FC<DataObject> = ({ name, logo, width, height }): JSX.Element => {
-    const aspectVideo = width ? '' : 'aspect-video'; 
+const ImageInGrid: React.FC<DataObject> = ({
+    name,
+    logo,
+    width,
+    height,
+    imageCount,
+}): JSX.Element => {
+    const aspectVideo = width ? '' : 'aspect-video';
     return (
-    <div className='w-full p-4'>
-        <Image
-            key={name}
-            alt={name}
-            className={`mx-auto ${aspectVideo} overflow-hidden rounded-xl object-cover object-center sm:w-full transition-all duration-500 ease-in-out`}
-            height={`${height ? height : '300'}`}
-            src={logo}
-            placeholder={`data:image/svg+xml;base64,${toBase64(shimmer(width || 550, height || 300))}`}
-            width={`${width ? width : '300'}`}
-        />
-    </div>
-)};
+        <div className='w-full p-4'>
+            <Image
+                loading={imageCount && imageCount++ < 15 ? 'eager' : 'lazy'}
+                key={name}
+                alt={name}
+                className={`mx-auto ${aspectVideo} overflow-hidden rounded-xl object-cover object-center sm:w-full transition-all duration-500 ease-in-out`}
+                height={`${height ? height : '300'}`}
+                src={logo}
+                placeholder={`data:image/svg+xml;base64,${toBase64(
+                    shimmer(width || 550, height || 300),
+                )}`}
+                width={`${width ? width : '300'}`}
+            />
+        </div>
+    );
+};
 
-const renderImage = ({ name, logo, route }: DataObject, width?: number, height?: number): JSX.Element =>
+const renderImage = (
+    { name, logo, route }: DataObject,
+    imageCount?: number,
+    width?: number,
+    height?: number,
+): JSX.Element =>
     route ? (
-        <Link key={name} href={route} title={name}>
-            <ImageInGrid key={name} name={name} logo={logo} width={width} height={height} />
+        <Link prefetch={true} key={name} href={route} title={name}>
+            <ImageInGrid
+                key={name}
+                name={name}
+                logo={logo}
+                width={width}
+                height={height}
+                imageCount={imageCount}
+            />
         </Link>
     ) : (
-        <ImageInGrid key={name} name={name} logo={logo} width={width} height={height} />
+        <ImageInGrid
+            key={name}
+            name={name}
+            logo={logo}
+            width={width}
+            height={height}
+            imageCount={imageCount}
+        />
     );
 
 const GridOfImages: React.FC<Grid> = ({ data, isShuffled, maxItems, cols, width, height }) => {
+    let imageCount = 0;
     let array = [];
     if (isShuffled) {
         array = maxItems ? shuffleArray(data).slice(0, maxItems) : shuffleArray(data);
@@ -79,31 +110,47 @@ const GridOfImages: React.FC<Grid> = ({ data, isShuffled, maxItems, cols, width,
         <div
             className={`mx-auto grid max-w-5xl xl:max-w-7xl items-center gap-6 py-12 lg:grid-cols-2 ${maxCols} lg:gap-12`}
         >
-            {array.map((d): JSX.Element => renderImage(d, width, height))}
+            {array.map((d): JSX.Element => renderImage(d, imageCount++, width, height))}
         </div>
-    );}
+    );
+};
 
 const SectionGripOfImages: React.FC<ISectionProps> = ({ title, description, data, maxItems, isShuffled, buttonText, buttonLink, cols, width, height }) => {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32">
-        <div className="container mx-auto px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">{title}</h2>
-                {description &&
-                    <p className="max-w-[900px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                    {description}
-                    </p>
-                }
-            </div>
-            <GridOfImages data={data} maxItems={maxItems} isShuffled={isShuffled} cols={cols} width={width} height={height} />
-            {buttonText &&
-                <div className="flex justify-center">
-                    {buttonLink ? <Button asChild><Link href={buttonLink}>{buttonText}</Link></Button>: <Button>{buttonText}</Button>}
-                </div>
-            }
-        </div>
-    </section>
-  )
+      <section className='w-full py-12 md:py-24 lg:py-32'>
+          <div className='container mx-auto px-4 md:px-6'>
+              <div className='flex flex-col items-center justify-center space-y-4 text-center'>
+                  <h2 className='text-3xl font-bold tracking-tighter sm:text-5xl'>{title}</h2>
+                  {description && (
+                      <p className='max-w-[900px] text-gray-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400'>
+                          {description}
+                      </p>
+                  )}
+              </div>
+              <GridOfImages
+                  data={data}
+                  maxItems={maxItems}
+                  isShuffled={isShuffled}
+                  cols={cols}
+                  width={width}
+                  height={height}
+              />
+              {buttonText && (
+                  <div className='flex justify-center'>
+                      {buttonLink ? (
+                          <Button asChild>
+                              <Link prefetch={true} href={buttonLink}>
+                                  {buttonText}
+                              </Link>
+                          </Button>
+                      ) : (
+                          <Button>{buttonText}</Button>
+                      )}
+                  </div>
+              )}
+          </div>
+      </section>
+  );
 }
 
 export default SectionGripOfImages
