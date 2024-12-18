@@ -50,10 +50,11 @@ const ImageInGrid: React.FC<DataObject> = ({
     imageCount,
 }): JSX.Element => {
     const aspectVideo = width ? '' : 'aspect-video';
+    const imageNumber = imageCount ?? 0;
     return (
         <div className='w-full p-4'>
             <Image
-                loading={imageCount && imageCount++ < 15 ? 'eager' : 'lazy'}
+                loading={imageNumber < 15 ? 'eager' : 'lazy'}
                 key={name}
                 alt={name}
                 className={`mx-auto ${aspectVideo} overflow-hidden rounded-xl object-cover object-center sm:w-full transition-all duration-500 ease-in-out`}
