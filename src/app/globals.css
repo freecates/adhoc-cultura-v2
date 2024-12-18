@@ -118,3 +118,28 @@ body {
     width: 474px;
   }
 }
+
+
+figure {
+  a {
+    img {
+      margin: 0 auto;
+    }
+  }
+}
+
+.wp-block-button {
+  margin: 2rem;
+  text-align: center;
+
+  a {
+    text-decoration: none;
+    background-color: #444444;
+    padding: 1rem;
+    color: #ffffff;
+    border-radius: 25px;
+  }
+  a:hover {
+    background-color: #aaaaaa;
+  }
+}
