@@ -134,12 +134,13 @@ figure {
 
   a {
     text-decoration: none;
-    background-color: #444444;
+    background-color: rgba(51,65,85,.9);
     padding: 1rem;
-    color: #ffffff;
-    border-radius: 25px;
+    color: hsla(0,0%,100%,.9);
+    border-radius: .375rem;
   }
   a:hover {
-    background-color: #aaaaaa;
+    background-color: hsla(0,0%,100%,.9);
+    color: rgba(51,65,85,.9);
   }
 }
