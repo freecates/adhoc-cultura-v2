@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    cacheComponents: true,
+    reactCompiler: true,
     transpilePackages: ['lucide-react'],
     images: {
         remotePatterns: [
@@ -34,9 +36,9 @@ const nextConfig = {
                 source: '/els-nostres-espais',
                 destination: '/qui-som',
                 permanent: true,
-            }
+            },
         ];
     },
 };
 
-module.exports = nextConfig
+module.exports = nextConfig;
