@@ -97,7 +97,8 @@ const renderImage = (
         />
     );
 
-const GridOfImages: React.FC<Grid> = ({ data, isShuffled, maxItems, cols, width, height }) => {
+const GridOfImages: React.FC<Grid> = async ({ data, isShuffled, maxItems, cols, width, height }) => {
+    'use cache'
     let imageCount = 0;
     let array = [];
     if (isShuffled) {

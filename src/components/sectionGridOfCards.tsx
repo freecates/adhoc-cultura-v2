@@ -46,7 +46,8 @@ interface ISectionProps extends Grid {
     buttonLink?: string;
 }
 
-const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }) => {
+const GridOfCards: React.FC<Grid> = async ({ data, image, icon, isShuffled, maxItems }) => {
+    'use cache'
     let array = [];
     if (isShuffled) {
         array = maxItems ? shuffleArray(data).slice(0, maxItems) : shuffleArray(data);
@@ -54,7 +55,6 @@ const GridOfCards: React.FC<Grid> = ({ data, image, icon, isShuffled, maxItems }
         array = maxItems ? data.slice(0, maxItems) : data;
     }
     const xlCols = array.length >= 6 ? 'xl:grid-cols-3' : '';
-
     return (
         <div
             className={`mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 ${xlCols} md:gap-12 lg:max-w-5xl lg:gap-12`}
